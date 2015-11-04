@@ -15,7 +15,7 @@ import butterknife.OnClick;
 /**
  * Created by zengjinlong on 15-10-29.
  */
-public class UserInfoFragment extends Fragment {
+public class UserInfoFragment extends BaseFragment {
 
     private static final String SERVICE_TEL = "10010";
     private Activity mActivity;

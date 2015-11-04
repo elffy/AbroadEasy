@@ -2,6 +2,7 @@ package com.original.abroadeasy;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
@@ -18,7 +19,7 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private Fragment mCurrentFragment;
+    private BaseFragment mCurrentFragment;
     private static final String[] FRAGMENT_TAGS = {"home", "find", "search", "user"};
     private static final int ID_HOME = 0;
     private static final int ID_FIND = 1;
@@ -56,6 +57,13 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+        mSwipRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mCurrentFragment.onRefresh();
+            }
+        });
+        mSwipRefreshLayout.setColorSchemeColors(Color.RED, Color.YELLOW, Color.GREEN);
         switchToFragment(ID_HOME);
     }
 
@@ -67,7 +75,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void switchToFragment(int id) {
-        mCurrentFragment = getFragmentManager().findFragmentByTag(FRAGMENT_TAGS[id]);
+        mCurrentFragment = (BaseFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAGS[id]);
         if (mCurrentFragment == null) {
             switch (id) {
                 case ID_HOME:

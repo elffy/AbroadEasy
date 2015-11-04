@@ -2,6 +2,8 @@ package com.original.abroadeasy;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ public class HomeFragment extends BaseFragment {
 
     private View mView;
     private RecyclerView mRecyclerView;
+    private MyHandler mHandler;
 
     public HomeFragment() {
     }
@@ -28,6 +31,7 @@ public class HomeFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_main, container, false);
         intiView();
+        mHandler = new MyHandler();
         return mView;
     }
 
@@ -39,6 +43,28 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        mHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public void onRefresh() {
+        mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_REFRESH, 0, 0), 1000);
+    }
+
+    private static final int MSG_REFRESH = 0;
+    private class MyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            int what = msg.what;
+            if (MSG_REFRESH == what) {
+                if (msg.arg1 < 3) {
+                    msg.arg1++;
+                    sendMessageDelayed(mHandler.obtainMessage(MSG_REFRESH, msg.arg1 + 1, 0), 1000);
+                } else {
+                    setRefreshing(false);
+                }
+            }
+        }
     }
 
     private LinearLayoutManager mLinearLayoutManager;
