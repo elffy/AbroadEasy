@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AbroadEasy</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="login">Login</string>
+    <string name="poetry">"Some of us get dipped in flat \nsome in satin some in gloss \nBut every once in a while you find someone \nwho's iridescent and when you do \nnothing will ever compare."</string>
+
+</resources>
