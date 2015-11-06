@@ -1,9 +1,9 @@
 package com.original.abroadeasy;
 
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.RadioGroup;
 
 import com.original.abroadeasy.util.LogUtil;
+import com.original.abroadeasy.util.PreferenceUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -65,6 +66,15 @@ public class MainActivity extends BaseActivity {
         });
         mSwipRefreshLayout.setColorSchemeColors(Color.RED, Color.YELLOW, Color.GREEN);
         switchToFragment(ID_HOME);
+        if (true || PreferenceUtils.isFirstLaunch(this)) {
+            Snackbar.make(mSwipRefreshLayout, R.string.tip_pull_to_refresh, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.tip_ok, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    }).show();
+        }
     }
 
     @OnClick(R.id.fab)

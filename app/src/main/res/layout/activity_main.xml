@@ -30,7 +30,6 @@
         app:layout_behavior="com.original.abroadeasy.widget.ScrollFABBehavior"
         app:layout_anchor="@id/swipe_refresh_layout"
         app:layout_anchorGravity="right|bottom" />
-
     <RadioGroup
         android:id="@+id/tab_bar"
         android:layout_width="match_parent"
