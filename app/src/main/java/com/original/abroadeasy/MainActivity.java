@@ -92,6 +92,11 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.fab)
     public void onFabClick(View v) {
+        if (FRAGMENT_TAGS[0] == mCurrentFragment.getTag()) {
+            switchToFragment(ID_FIND);
+        } else if (FRAGMENT_TAGS[1] == mCurrentFragment.getTag()) {
+            //search by keywords
+        }
         LogUtil.d("FAB clicked!!");
         LogUtil.d("maxMemory():" + Runtime.getRuntime().maxMemory());
         LogUtil.d("totalMemory():" + Runtime.getRuntime().totalMemory());
@@ -108,6 +113,7 @@ public class MainActivity extends BaseActivity {
                     break;
                 case ID_FIND:
                     mCurrentFragment = new FindFragment();
+                    mFloatingActionBtn.setVisibility(View.VISIBLE);
                     break;
                 case ID_BLOG:
                     mCurrentFragment = new BlogFragment();
