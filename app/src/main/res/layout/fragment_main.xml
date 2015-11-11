@@ -12,7 +12,7 @@
         <com.original.abroadeasy.widget.BannerGallery
             android:id="@+id/banner_gallery"
             android:layout_width="match_parent"
-            android:layout_height="172dp"
+            android:layout_height="192dp"
             android:soundEffectsEnabled="false" />
 
         <LinearLayout
