@@ -3,11 +3,14 @@ package com.original.abroadeasy;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.RadioGroup;
 
 import com.original.abroadeasy.util.LogUtil;
@@ -75,6 +78,16 @@ public class MainActivity extends BaseActivity {
                         }
                     }).show();
         }
+
+
+        //Add the animation in the startup by yangli 2013.11.11 happy singles day
+        TranslateAnimation alphaAnimation = new TranslateAnimation(0, 0, 0,
+                -70);
+        alphaAnimation.setDuration(500);
+        alphaAnimation.setRepeatCount(3);
+        alphaAnimation.setRepeatMode(Animation.REVERSE);
+        mFloatingActionBtn.setAnimation(alphaAnimation);
+        alphaAnimation.start();
     }
 
     @OnClick(R.id.fab)

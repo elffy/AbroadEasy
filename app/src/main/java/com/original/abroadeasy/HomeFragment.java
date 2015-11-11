@@ -6,11 +6,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
@@ -28,7 +31,6 @@ import java.util.ArrayList;
 public class HomeFragment extends BaseFragment {
 
     private View mView;
-    private Context mContext;
     private RecyclerView mRecyclerView;
     private BannerGallery mBannerGallery;
     private LinearLayout mDotLayout;
@@ -44,12 +46,6 @@ public class HomeFragment extends BaseFragment {
         intiView();
         mHandler = new MyHandler();
         return mView;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mContext = activity;
     }
 
     @Override
@@ -93,6 +89,7 @@ public class HomeFragment extends BaseFragment {
         mBannerGallery = (BannerGallery) mView.findViewById(R.id.banner_gallery);
         mDotLayout = (LinearLayout) mView.findViewById(R.id.banner_dot);
         initBanner();
+
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_view);
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -184,7 +181,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initBanner() {
-        BannerAdapter adapter = new BannerAdapter(mContext);
+        BannerAdapter adapter = new BannerAdapter(mActivity);
         mBannerGallery.setAdapter(adapter);
         mBannerGallery.setSelection(1000);
         mBannerGallery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -207,7 +204,7 @@ public class HomeFragment extends BaseFragment {
         });
 
         for (int i = 0; i < sBannerCount; i++) {
-            ImageView view = new ImageView(mContext);
+            ImageView view = new ImageView(mActivity);
             view.setImageResource(R.mipmap.banner_dot_normal);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
