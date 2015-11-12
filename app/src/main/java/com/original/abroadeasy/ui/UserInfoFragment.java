@@ -109,7 +109,7 @@ public class UserInfoFragment extends BaseFragment {
         popDialog(R.string.register);
     }
 
-    private void popDialog(int titleResId) {
+    /*private void popDialog(int titleResId) {
         final View loginLayout = mActivity.getLayoutInflater().inflate(R.layout.log_in_dialog_layout, null);
         final AlertDialog dialog = new AlertDialog.Builder(mActivity)
                 .setTitle(titleResId)
@@ -117,7 +117,7 @@ public class UserInfoFragment extends BaseFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
-                        /* User clicked OK so do some stuff */
+                        *//* User clicked OK so do some stuff *//*
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -127,6 +127,57 @@ public class UserInfoFragment extends BaseFragment {
                 .show();
         Button okBtn = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userName = ((TextView) loginLayout.findViewById(R.id.username_edit))
+                        .getText().toString().trim();
+                String password = ((TextView) loginLayout.findViewById(R.id.password_edit))
+                        .getText().toString().trim();
+                if ("".equals(userName)) {
+                    return;
+                }
+                if ("".equals(password)) {
+                    return;
+                }
+                mUserInfo = new UserInfo(userName, password);
+                UserInfo.saveLoggedInUser(mActivity,mUserInfo);
+                mUserNameView.setVisibility(View.VISIBLE);
+                mUserNameView.setText(mUserInfo.getName());
+                dialog.dismiss();
+            }
+        });
+    }*/
+
+    private void popDialog(int titleResId) {
+        final View loginLayout = mActivity.getLayoutInflater().inflate(R.layout.third_log_in_dialog_layout, null);
+        final AlertDialog dialog = new AlertDialog.Builder(mActivity)
+                .setTitle(titleResId)
+                .setView(loginLayout)
+                .show();
+        Button weiboBtn = (Button) loginLayout.findViewById(R.id.button);
+        weiboBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userName = ((TextView) loginLayout.findViewById(R.id.username_edit))
+                        .getText().toString().trim();
+                String password = ((TextView) loginLayout.findViewById(R.id.password_edit))
+                        .getText().toString().trim();
+                if ("".equals(userName)) {
+                    return;
+                }
+                if ("".equals(password)) {
+                    return;
+                }
+                mUserInfo = new UserInfo(userName, password);
+                UserInfo.saveLoggedInUser(mActivity,mUserInfo);
+                mUserNameView.setVisibility(View.VISIBLE);
+                mUserNameView.setText(mUserInfo.getName());
+                dialog.dismiss();
+            }
+        });
+
+        Button weixinBtn = (Button) loginLayout.findViewById(R.id.button2);
+        weixinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String userName = ((TextView) loginLayout.findViewById(R.id.username_edit))

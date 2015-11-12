@@ -12,5 +12,10 @@
     <string name="login_username">Name:</string>
     <string name="login_password">Password:</string>
     <string name="setting_clear_cache">Clear Cache</string>
-    <string name="setting_log_out">Log Out</string>
+    <string name="weibo_log_in">Log by WeiBo</string>
+    <string name="weichat_log_in">Log by WeChat</string>
+    <string name="protocol_log_in">Accept protocol while login in</string>
+    <string name="way_log_in">choose any kind of login way</string>
+    <string name="title_log_in">Login aE</string>
+    <string name="setting_log_out">Log Out</string>\
 </resources>

@@ -35,8 +35,6 @@ public class App extends Application {
         PreferenceUtils.init(this);
         //DbManager.init(this);
         sContext = getApplicationContext();
-
-        setupSharePreferenceHelper(getApplicationContext());
         setUpApiService();
 
 
@@ -62,10 +60,6 @@ public class App extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-    }
-
-    private void setupSharePreferenceHelper(Context context) {
-        SharedPreferencesHelper.getInstance().Builder(context);
     }
 
     public static Context getsContext() {
