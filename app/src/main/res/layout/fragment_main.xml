@@ -1,56 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/banner_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.original.abroadeasy.widget.BannerGallery
-            android:id="@+id/banner_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="192dp"
-            android:soundEffectsEnabled="false" />
-
-        <LinearLayout
-            android:id="@+id/banner_dot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:layout_marginBottom="4dp"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/dot_focus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/banner_dot_focus"
-                android:visibility="gone" />
-        </LinearLayout>
-    </FrameLayout>
-
-    <LinearLayout
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/banner_layout"
-        android:orientation="vertical" >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/banner"
-        android:paddingLeft="2.5dp"
-        android:paddingRight="2.5dp" />
-</RelativeLayout>
+</android.support.v7.widget.RecyclerView>

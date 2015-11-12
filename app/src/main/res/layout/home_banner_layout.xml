@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/banner_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.original.abroadeasy.widget.BannerGallery
+        android:id="@+id/banner_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:soundEffectsEnabled="false" />
+
+    <LinearLayout
+        android:id="@+id/banner_dot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="4dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/dot_focus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/banner_dot_focus"
+            android:visibility="gone" />
+    </LinearLayout>
+</FrameLayout>

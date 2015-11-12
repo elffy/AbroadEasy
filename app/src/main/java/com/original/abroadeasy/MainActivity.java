@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity {
         });
         mSwipRefreshLayout.setColorSchemeColors(Color.RED, Color.YELLOW, Color.GREEN);
         switchToFragment(ID_HOME);
-        if (true || PreferenceUtils.isFirstLaunch(this)) {
+        if (PreferenceUtils.isFirstLaunch(this)) {
             Snackbar.make(mSwipRefreshLayout, R.string.tip_pull_to_refresh, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.tip_ok, new View.OnClickListener() {
                         @Override
@@ -92,11 +92,6 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.fab)
     public void onFabClick(View v) {
-        if (FRAGMENT_TAGS[0] == mCurrentFragment.getTag()) {
-            switchToFragment(ID_FIND);
-        } else if (FRAGMENT_TAGS[1] == mCurrentFragment.getTag()) {
-            //search by keywords
-        }
         LogUtil.d("FAB clicked!!");
         LogUtil.d("maxMemory():" + Runtime.getRuntime().maxMemory());
         LogUtil.d("totalMemory():" + Runtime.getRuntime().totalMemory());

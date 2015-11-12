@@ -16,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,15 +26,24 @@ import com.original.abroadeasy.widget.BannerGallery;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * A placeholder fragment containing a simple view.
  */
 public class HomeFragment extends BaseFragment {
 
     private View mView;
-    private RecyclerView mRecyclerView;
-    private BannerGallery mBannerGallery;
-    private LinearLayout mDotLayout;
+
+    @Bind(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+
+    BannerGallery mBannerGallery;
+    LinearLayout mDotLayout;
+    FrameLayout mBannerLayout;
+
+    private HeaderViewHolder mHeaderViewHolder;
     private MyHandler mHandler;
 
     public HomeFragment() {
@@ -43,6 +53,7 @@ public class HomeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, mView);
         intiView();
         mHandler = new MyHandler();
         return mView;
@@ -56,6 +67,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        ButterKnife.unbind(this);
         mHandler.removeCallbacksAndMessages(null);
     }
 
@@ -86,11 +98,10 @@ public class HomeFragment extends BaseFragment {
 
     private void intiView() {
 
-        mBannerGallery = (BannerGallery) mView.findViewById(R.id.banner_gallery);
-        mDotLayout = (LinearLayout) mView.findViewById(R.id.banner_dot);
+        // init banner first.
         initBanner();
 
-        mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_view);
+        // init recyclerView.
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mAdapter = new MyAdapter(mActivity.getLayoutInflater());
@@ -111,7 +122,9 @@ public class HomeFragment extends BaseFragment {
         });
     }
 
-    private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    private static final int ITEM_TYPE_NORMAL = 0;
+    private static final int ITME_TYPE_HEADER = 1;
+    private class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ArrayList<HomeItem> mData;
         final LayoutInflater mLayoutInflater;
 
@@ -132,14 +145,29 @@ public class HomeFragment extends BaseFragment {
         }
 
         @Override
-        public MyViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
-            return new MyViewHolder(
-                    mLayoutInflater.inflate(R.layout.home_item_view, parent, false));
+        public int getItemViewType(int position) {
+            if (position == 0) {
+                return ITME_TYPE_HEADER;
+            } else {
+                return ITEM_TYPE_NORMAL;
+            }
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            holder.bindTo(mData.get(position));
+        public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+            if (viewType == ITEM_TYPE_NORMAL) {
+                return new MyViewHolder(
+                        mLayoutInflater.inflate(R.layout.home_item_view, parent, false));
+            } else {
+                return mHeaderViewHolder;
+            }
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if (position != 0) {
+                ((MyViewHolder)holder).bindTo(mData.get(position));
+            }
         }
 
         @Override
@@ -180,7 +208,20 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
+    private static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        public HeaderViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
     private void initBanner() {
+        mBannerLayout = (FrameLayout) mActivity.getLayoutInflater().inflate(R.layout.home_banner_layout, null);
+        // somehow the layoutParams will lost after inflate...???
+        mBannerLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT));
+        mHeaderViewHolder = new HeaderViewHolder(mBannerLayout);
+        mBannerGallery = (BannerGallery) mBannerLayout.findViewById(R.id.banner_gallery);
+        mDotLayout = (LinearLayout) mBannerLayout.findViewById(R.id.banner_dot);
         BannerAdapter adapter = new BannerAdapter(mActivity);
         mBannerGallery.setAdapter(adapter);
         mBannerGallery.setSelection(1000);
