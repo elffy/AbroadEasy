@@ -2,7 +2,6 @@ package com.original.abroadeasy.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
 import com.google.gson.Gson;
@@ -10,8 +9,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.internal.bind.DateTypeAdapter;
 import com.original.abroadeasy.BuildConfig;
 import com.original.abroadeasy.network.http.AppApiService;
+import com.original.abroadeasy.util.LiteOrmDBUtil;
 import com.original.abroadeasy.util.PreferenceUtils;
-import com.original.abroadeasy.util.SharedPreferencesHelper;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.Date;
@@ -20,8 +19,6 @@ import java.util.concurrent.TimeUnit;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
-
-import static android.content.SharedPreferences.*;
 
 /**
  * Created by zengjinlong on 15-10-28.
@@ -33,10 +30,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         PreferenceUtils.init(this);
-        //DbManager.init(this);
+        LiteOrmDBUtil.init(this);
+//        LiteOrmDBUtil.test();
         sContext = getApplicationContext();
         setUpApiService();
-
 
     }
 

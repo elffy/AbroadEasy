@@ -5,9 +5,8 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.original.abroadeasy.base.BaseActivity;
 import com.original.abroadeasy.R;
-import com.original.abroadeasy.data.UserInfo;
+import com.original.abroadeasy.model.UserInfo;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

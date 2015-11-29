@@ -1,6 +1,7 @@
 package com.original.abroadeasy.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.original.abroadeasy.R;
+import com.original.abroadeasy.adapter.HomeListAdapter;
+import com.original.abroadeasy.model.HomeItem;
 import com.original.abroadeasy.widget.BannerGallery;
 
 import java.util.ArrayList;
@@ -91,7 +94,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private LinearLayoutManager mLinearLayoutManager;
-    private MyAdapter mAdapter;
+    private HomeListAdapter mAdapter;
 
     private void intiView() {
 
@@ -101,7 +104,14 @@ public class HomeFragment extends BaseFragment {
         // init recyclerView.
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new MyAdapter(mActivity.getLayoutInflater());
+        mAdapter = new HomeListAdapter(mActivity, mActivity.getLayoutInflater());
+        mAdapter.setOnItemClickListener(new HomeListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int postion) {
+                startDetailActivity();
+            }
+        });
+        mAdapter.setmHeaderViewHolder(mHeaderViewHolder);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int mScrolledY = 0;
@@ -119,90 +129,9 @@ public class HomeFragment extends BaseFragment {
         });
     }
 
-    private static final int ITEM_TYPE_NORMAL = 0;
-    private static final int ITME_TYPE_HEADER = 1;
-    private class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        ArrayList<HomeItem> mData;
-        final LayoutInflater mLayoutInflater;
-
-        public MyAdapter(LayoutInflater layoutInflater) {
-            mData = new ArrayList<HomeItem>();
-            mLayoutInflater = layoutInflater;
-            for (int i = 0; i < 20; i++) {
-                Drawable d;
-                if (i % 3 == 0) {
-                    d = mActivity.getResources().getDrawable(R.mipmap.pic1);
-                } else if (i % 3 == 1) {
-                    d = mActivity.getResources().getDrawable(R.mipmap.pic2);
-                } else {
-                    d = mActivity.getResources().getDrawable(R.mipmap.pic3);
-                }
-                mData.add(new HomeItem("this is item : " + i, d));
-            }
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            if (position == 0) {
-                return ITME_TYPE_HEADER;
-            } else {
-                return ITEM_TYPE_NORMAL;
-            }
-        }
-
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
-            if (viewType == ITEM_TYPE_NORMAL) {
-                return new MyViewHolder(
-                        mLayoutInflater.inflate(R.layout.home_item_view, parent, false));
-            } else {
-                return mHeaderViewHolder;
-            }
-        }
-
-        @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            if (position != 0) {
-                ((MyViewHolder)holder).bindTo(mData.get(position));
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return mData.size();
-        }
-
-    }
-
-    private static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView mText;
-        private ImageView mImage;
-        HomeItem mBoundItem;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            mText = (TextView) itemView.findViewById(R.id.item_text);
-            mImage = (ImageView) itemView.findViewById(R.id.item_image);
-        }
-
-        public void bindTo(HomeItem item) {
-            mBoundItem = item;
-            mText.setText(item.mText);
-            mImage.setImageDrawable(item.mPicture);
-        }
-
-    }
-
-    private static class HomeItem {
-        String mText;
-        Drawable mPicture;
-        private static int idCounter = 0;
-
-        public HomeItem(String text, Drawable d) {
-            mText = text;
-            mPicture = d;
-        }
+    private void startDetailActivity() {
+        Intent intent = new Intent(mActivity, DetailActivity.class);
+        startActivity(intent);
     }
 
     private static class HeaderViewHolder extends RecyclerView.ViewHolder {
@@ -222,6 +151,12 @@ public class HomeFragment extends BaseFragment {
         BannerAdapter adapter = new BannerAdapter(mActivity);
         mBannerGallery.setAdapter(adapter);
         mBannerGallery.setSelection(1000);
+        mBannerGallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startDetailActivity();
+            }
+        });
         mBannerGallery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {

@@ -15,3 +15,34 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# must keep these for using LiteOrm lib
+-keepattributes *Annotation*,Signature,Exceptions
+-keepclassmembers enum * {
+    **[] $VALUES;
+    public *;
+}
+
+-dontwarn com.squareup.okhttp.**
+-keep public class org.apache.http.** { *;}
+
+# keep for butterknife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+# Keep the support library
+-dontwarn android.support.v4.**
+-keep class android.support.** { *; }
+-keep interface android.support.** { *; }
+
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}

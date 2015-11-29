@@ -1,10 +1,9 @@
-package com.original.abroadeasy.data;
+package com.original.abroadeasy.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.original.abroadeasy.util.PreferenceUtils;
-import com.sina.weibo.sdk.WeiboAppManager;
 
 /**
  * Created by zengjinlong on 15-11-12.

@@ -12,7 +12,6 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.RadioGroup;
 
-import com.original.abroadeasy.base.BaseActivity;
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.util.PreferenceUtils;
@@ -23,7 +22,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = "ABE_MainActivity";
     private BaseFragment mCurrentFragment;
     private static final String[] FRAGMENT_TAGS = {"home", "find", "search", "user"};
     private static final int ID_HOME = 0;

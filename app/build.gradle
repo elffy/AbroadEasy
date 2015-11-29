@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.android.support:cardview-v7:22.2.1'
@@ -60,5 +60,4 @@ dependencies {
     //图片加载  代码地址-----> https://github.com/square/picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:multidex:1.0.0'
-    compile files('src/main/libs/weiboSDKCore_3.1.2.jar')
 }

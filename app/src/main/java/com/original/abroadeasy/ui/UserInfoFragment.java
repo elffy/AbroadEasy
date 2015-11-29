@@ -2,7 +2,6 @@ package com.original.abroadeasy.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.original.abroadeasy.R;
-import com.original.abroadeasy.data.UserInfo;
+import com.original.abroadeasy.model.UserInfo;
 import com.original.abroadeasy.network.weibo.AccessTokenKeeper;
 import com.original.abroadeasy.network.weibo.WBConstants;
 import com.sina.weibo.sdk.auth.AuthInfo;
