@@ -18,6 +18,9 @@
     <string name="way_log_in">choose any kind of login way</string>
     <string name="title_log_in">Login aE</string>
     <string name="setting_log_out">Log Out</string>
+    <!-- The font-family to use for tab text.
+         Do not translate. -->
+    <string name="tab_font_family">sans-serif</string>
 
     <!-- 获取 Token -->
     <string name="weibosdk_demo_obtain_token_via_sso_all_in_one">SSO 授权（ALL IN ONE）</string>

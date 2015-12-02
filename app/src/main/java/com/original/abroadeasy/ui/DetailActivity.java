@@ -97,22 +97,6 @@ public class DetailActivity extends BaseActivity {
         super.onPause();
     }
 
-    @OnClick(R.id.btn_heart)
-    void onHeartBtnClicked(View v) {
-    }
-
-    @OnClick(R.id.btn_star)
-    void onStarBtnClicked(View v) {
-    }
-
-    @OnClick(R.id.btn_more)
-    void onMoreBtnClicked(View v) {
-    }
-
-    @OnClick(R.id.btn_question)
-    void onQuestionBtnClicked(View v) {
-    }
-
     @OnClick(R.id.btn_setting)
     void onSettingBtnClicked(View v) {
     }

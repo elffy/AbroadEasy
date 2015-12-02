@@ -32,7 +32,11 @@
         </FrameLayout>
     </com.original.abroadeasy.widget.ListenableScrollView>
 
-    <LinearLayout
+    <include
+        android:id="@+id/middle_btns_layout"
+        layout="@layout/ae_detail_activity_toolbar" />
+
+   <!-- <LinearLayout
         android:id="@+id/middle_btns_layout"
         android:layout_width="match_parent"
         android:layout_height="42dp"
@@ -63,7 +67,7 @@
             android:layout_weight="1"
             android:src="@mipmap/article_question"
             android:id="@+id/btn_question" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <RelativeLayout
         android:id="@+id/bottom_layout"
