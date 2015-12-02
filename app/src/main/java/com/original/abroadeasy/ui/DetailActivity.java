@@ -5,10 +5,11 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ScrollView;
+import android.widget.ImageView;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.util.LogUtil;
+import com.original.abroadeasy.widget.ListenableScrollView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,13 +25,33 @@ public class DetailActivity extends BaseActivity {
     @Bind(R.id.conent_webview)
     WebView mWebView;
     @Bind(R.id.scroll_view)
-    ScrollView mScrollView;
+    ListenableScrollView mScrollView;
+    @Bind(R.id.detail_pic)
+    ImageView mPicture;
+    @Bind(R.id.middle_btns_layout)
+    View mMiddleBars;
+
+    private static final int IMAGE_LAYOUT_HEIGHT = 690;// define in the dimens/
+    ListenableScrollView.OnScrollChangedListener mOnScrollListener = new ListenableScrollView.OnScrollChangedListener() {
+        @Override
+        public void onScrollChanged(int x, int y, int oldx, int oldy) {
+
+            if (y < IMAGE_LAYOUT_HEIGHT) {
+                mPicture.setTranslationY(-y/2);
+                mMiddleBars.setTranslationY(-y);
+            } else {
+                mMiddleBars.setTranslationY(-IMAGE_LAYOUT_HEIGHT);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
         ButterKnife.bind(this);
+
+        mScrollView.setOnScrollListener(mOnScrollListener);
     }
 
     @Override

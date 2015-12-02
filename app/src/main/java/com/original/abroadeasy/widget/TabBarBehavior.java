@@ -33,19 +33,34 @@ public class TabBarBehavior extends CoordinatorLayout.Behavior<View> {
         return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 
-    //2.根据滑动的距离显示和隐藏footer view
     @Override
-    public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
-        if (dy > 0 && sinceDirectionChange < 0 || dy < 0 && sinceDirectionChange > 0) {
+    public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child,
+                               View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+        if (dyConsumed > 0 && sinceDirectionChange < 0 || dyConsumed < 0 && sinceDirectionChange > 0) {
             child.animate().cancel();
             sinceDirectionChange = 0;
         }
-        sinceDirectionChange += dy;
+        sinceDirectionChange += dyConsumed;
         if (sinceDirectionChange > child.getHeight() && child.getVisibility() == View.VISIBLE) {
             hide(child);
         } else if (sinceDirectionChange < 0 && child.getVisibility() == View.GONE) {
             show(child);
         }
+    }
+
+    //2.根据滑动的距离显示和隐藏footer view
+    @Override
+    public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
+//        if (dy > 0 && sinceDirectionChange < 0 || dy < 0 && sinceDirectionChange > 0) {
+//            child.animate().cancel();
+//            sinceDirectionChange = 0;
+//        }
+//        sinceDirectionChange += dy;
+//        if (sinceDirectionChange > child.getHeight() && child.getVisibility() == View.VISIBLE) {
+//            hide(child);
+//        } else if (sinceDirectionChange < 0 && child.getVisibility() == View.GONE) {
+//            show(child);
+//        }
     }
 
 
