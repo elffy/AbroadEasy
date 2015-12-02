@@ -84,6 +84,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:src="@mipmap/ic_setting"
+            android:layout_marginTop="5dp"
             android:id="@+id/btn_setting" />
         <ImageView
             android:layout_width="wrap_content"
@@ -91,6 +92,7 @@
             android:layout_toLeftOf="@+id/btn_setting"
             android:layout_marginRight="10dp"
             android:src="@mipmap/article_message"
+            android:layout_marginTop="5dp"
             android:id="@+id/btn_message" />
         <ImageView
             android:layout_width="wrap_content"
@@ -98,6 +100,7 @@
             android:layout_toLeftOf="@+id/btn_message"
             android:layout_marginRight="10dp"
             android:src="@mipmap/ic_phone"
+            android:layout_marginTop="5dp"
             android:id="@+id/btn_phone" />
     </RelativeLayout>
 
