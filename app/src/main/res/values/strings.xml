@@ -18,6 +18,11 @@
     <string name="way_log_in">choose any kind of login way</string>
     <string name="title_log_in">Login aE</string>
     <string name="setting_log_out">Log Out</string>
+    <string name="tab_title_gen">Gene</string>
+    <string name="tab_title_content">Cont</string>
+    <string name="tab_title_fare">Fare</string>
+    <string name="tab_title_comment">Comm</string>
+
     <!-- The font-family to use for tab text.
          Do not translate. -->
     <string name="tab_font_family">sans-serif</string>
