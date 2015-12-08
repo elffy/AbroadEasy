@@ -1,12 +1,13 @@
 package com.original.abroadeasy.ui;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -37,8 +38,8 @@ public class DetailActivity extends BaseActivity {
     private static final String TAG = "ABE_DetailActivity";
 
 
-    @Bind(R.id.scroll_view)
-    ListenableScrollView mScrollView;
+//    @Bind(R.id.scroll_view)
+//    ListenableScrollView mScrollView;
     @Bind(R.id.detail_pic)
     ImageView mPicture;
     @Bind(R.id.middle_btns_layout)
@@ -46,8 +47,8 @@ public class DetailActivity extends BaseActivity {
 
     //Add by yangli for viewtab
     //** ViewPager for swipe */
-    private CustomerViewPager mTabPager;
-    private ViewPagerTabs mViewPagerTabs;
+    private ViewPager mTabPager;
+//    private ViewPagerTabs mViewPagerTabs;
     private TabPagerAdapter mTabPagerAdapter;
     private String[] mTabTitles;
 
@@ -66,7 +67,7 @@ public class DetailActivity extends BaseActivity {
     private DetailSubFragmentComment mDetailSubFragmentComment;
 
     private static Resources res;
-    private Toolbar toolbar;
+//    private Toolbar toolbar;
     //Add end by yangli for viewtab
 
     private static final int IMAGE_LAYOUT_HEIGHT = 690;// define in the dimens/
@@ -87,18 +88,18 @@ public class DetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createViewsAndFragments(savedInstanceState);
-        toolbar.setVisibility(View.GONE);
+//        toolbar.setVisibility(View.GONE);
 
         ButterKnife.bind(this);
 
-        mScrollView.setOnScrollListener(mOnScrollListener);
+//        mScrollView.setOnScrollListener(mOnScrollListener);
     }
 
     //Add by yangli 2015.12.03
     private void createViewsAndFragments(Bundle savedInstanceState) {
         setContentView(R.layout.detail_activity);
 
-        final FragmentManager fragmentManager = getFragmentManager();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
         //Hide all tabs
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         mTabTitles = new String[TabState.COUNT];
@@ -112,20 +113,20 @@ public class DetailActivity extends BaseActivity {
         mTabPager.setAdapter(mTabPagerAdapter);
         mTabPager.setOnPageChangeListener(mTabPagerListener);
         //init toolbar(Old action bar)
-        toolbar = (Toolbar) this.findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);
-        this.setActionBar(toolbar);
+//        toolbar = (Toolbar) this.findViewById(R.id.toolbar);
+//        toolbar.setTitleTextColor(Color.WHITE);
+//        this.setActionBar(toolbar);
 
-        portraitViewPagerTabs = (ViewPagerTabs) findViewById(R.id.lists_pager_header);
-        ViewPagerTabs landscapeViewPagerTabs = null;
-        if (null == portraitViewPagerTabs) {
-            landscapeViewPagerTabs = (ViewPagerTabs) getLayoutInflater()
-                    .inflate(R.layout.detail_activity_tabs_lands, toolbar, false);
-            mViewPagerTabs = landscapeViewPagerTabs;
-        } else {
-            mViewPagerTabs = portraitViewPagerTabs;
-        }
-        mViewPagerTabs.setViewPager(mTabPager);
+//        portraitViewPagerTabs = (ViewPagerTabs) findViewById(R.id.lists_pager_header);
+//        ViewPagerTabs landscapeViewPagerTabs = null;
+//        if (null == portraitViewPagerTabs) {
+//            landscapeViewPagerTabs = (ViewPagerTabs) getLayoutInflater()
+//                    .inflate(R.layout.detail_activity_tabs_lands, toolbar, false);
+//            mViewPagerTabs = landscapeViewPagerTabs;
+//        } else {
+//            mViewPagerTabs = portraitViewPagerTabs;
+//        }
+//        mViewPagerTabs.setViewPager(mTabPager);
 
         final String GENERAL_TAG = "tag-pager-general";
         final String CONTENT_TAG = "tag-pager-content";
@@ -149,6 +150,7 @@ public class DetailActivity extends BaseActivity {
 
         if (null == mDetailSubFragmentGen) {
             mDetailSubFragmentGen = new DetailSubFragmentGen();
+            mDetailSubFragmentGen.setViewPager((CustomerViewPager)mTabPager);
             mDetailSubFragmentContent = new DetailSubFragmentContent();
             mDetailSubFragmentFare = new DetailSubFragmentFare();
             mDetailSubFragmentComment = new DetailSubFragmentComment();
@@ -180,10 +182,34 @@ public class DetailActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+//        initWebView();
     }
 
-
+//    private void initWebView() {
+//        WebView mWebView = (WebView)findViewById(R.id.conent_webview1);
+//        mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        });
+//        mWebView.setWebChromeClient(new WebChromeClient() {
+//            @Override
+//            public void onProgressChanged(WebView view, int newProgress) {
+//                LogUtil.d("onProgressChanged:" + newProgress);
+//                // TODO Auto-generated method stub
+//                if (newProgress == 100) {
+////                    mLoaded = true;
+//                } else {
+//
+//                }
+//
+//            }
+//        });
+//        mWebView.loadUrl("http://square.github.io/retrofit/");
+//    }
     @Override
     protected void onPause() {
         super.onPause();
@@ -228,21 +254,51 @@ public class DetailActivity extends BaseActivity {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            mViewPagerTabs.onPageScrolled(position, positionOffset, positionOffsetPixels);
+//            mViewPagerTabs.onPageScrolled(position, positionOffset, positionOffsetPixels);
         }
 
         @Override
         public void onPageSelected(int position) {
 
             CURRENT_FRAGMENT_INDEX = position;
-            mViewPagerTabs.onPageSelected(position);
+//            mViewPagerTabs.onPageSelected(position);
             invalidateOptionsMenu();
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
 
-            mViewPagerTabs.onPageScrollStateChanged(state);
+//            mViewPagerTabs.onPageScrollStateChanged(state);
+        }
+    }
+
+    private class MyPagerAdapter extends FragmentStatePagerAdapter {
+        MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+        @Override
+        public void startUpdate(ViewGroup container) {
+            super.startUpdate(container);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            return super.instantiateItem(container, position);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 0;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
         }
     }
 
@@ -254,7 +310,7 @@ public class DetailActivity extends BaseActivity {
         private Fragment mCurrentPrimaryItem;
 
         public TabPagerAdapter() {
-            mFragmentManager = getFragmentManager();
+            mFragmentManager = getSupportFragmentManager();
         }
 
         @Override
