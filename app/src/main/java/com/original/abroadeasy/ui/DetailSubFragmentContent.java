@@ -1,7 +1,6 @@
 package com.original.abroadeasy.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import com.original.abroadeasy.R;
 /**
  * Created by yangli on 15-12-03
  */
-public class DetailSubFragmentContent extends Fragment {
+public class DetailSubFragmentContent extends BaseFragment {
 
     private View mView;
 

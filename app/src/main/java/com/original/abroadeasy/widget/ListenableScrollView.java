@@ -2,16 +2,13 @@ package com.original.abroadeasy.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.widget.ScrollView;
 
 import com.original.abroadeasy.util.LogUtil;
 
 /**
  * Created by zengjinlong on 15-12-2.
  */
-public class ListenableScrollView extends ScrollView {
+public class ListenableScrollView extends android.support.v4.widget.NestedScrollView {
 
     public interface OnScrollChangedListener {
         void onScrollChanged(int x, int y, int oldx, int oldy);
@@ -29,7 +26,6 @@ public class ListenableScrollView extends ScrollView {
 
     public ListenableScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mGestureDetector = new GestureDetector(new YScrollDetector());
     }
 
     public ListenableScrollView(Context context) {
@@ -48,23 +44,5 @@ public class ListenableScrollView extends ScrollView {
             mOnScrollListener.onScrollChanged(l, t, oldl, oldt);
         }
         LogUtil.d("onScrollChanged:" + l + "," + t + ",old:" + oldl + "," + oldt);
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return super.onInterceptTouchEvent(ev) && mGestureDetector.onTouchEvent(ev);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        return super.onTouchEvent(ev);
-    }
-
-    private GestureDetector mGestureDetector;
-    class YScrollDetector extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            return (Math.abs(distanceY) > Math.abs(distanceX));
-        }
     }
 }

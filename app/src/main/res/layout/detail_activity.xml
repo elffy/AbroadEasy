@@ -20,27 +20,31 @@
         android:fillViewport="true"
         android:overScrollMode="always" >
 
-        <!--<FrameLayout-->
-            <!--android:id="@+id/content_layout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="272dp" >-->
+        <FrameLayout
+            android:id="@+id/content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="272dp" >
 
             <com.original.abroadeasy.util.CustomerViewPager
-                android:id="@+id/tab_pager"
-                android:paddingTop="272dp"
+                android:id = "@+id/tab_pager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        <!--</FrameLayout>-->
+                android:layout_height="match_parent"
+                android:layout_alignWithParentIfMissing="true"
+                android:background="@android:color/white"/>
+
+            <!--<WebView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/conent_webview"/>-->
+        </FrameLayout>
     </com.original.abroadeasy.widget.ListenableScrollView>
 
-<!--
     <include
         android:id="@+id/middle_btns_layout"
         layout="@layout/ae_detail_activity_toolbar" />
--->
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:id="@+id/middle_btns_layout"
         android:layout_width="match_parent"
         android:layout_height="42dp"
@@ -71,7 +75,7 @@
             android:layout_weight="1"
             android:src="@mipmap/article_question"
             android:id="@+id/btn_question" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <RelativeLayout
         android:id="@+id/bottom_layout"
