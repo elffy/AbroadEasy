@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <array name="icons">
+        <item>@mipmap/blog_im1</item>
+        <item>@mipmap/blog_im2</item>
+        <item>@mipmap/blog_im3</item>
+        <item>@mipmap/blog_im1</item>
+        <item>@mipmap/blog_im2</item>
+        <item>@mipmap/blog_im3</item>
+        <item>@mipmap/blog_im1</item>
+        <item>@mipmap/blog_im2</item>
+        <item>@mipmap/blog_im3</item>
+    </array>
+
+</resources>
