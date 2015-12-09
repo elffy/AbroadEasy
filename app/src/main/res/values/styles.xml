@@ -8,25 +8,4 @@
     <style name="Theme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
 
-    <!-- When this style was added, android:toolbarStyle was private. Therefore, this style
-         must be directly applied to every toolbar -->
-    <style name="ToolbarStyle" parent="@android:style/Widget.Toolbar">
-        <item name="android:titleTextAppearance">@style/ActionBarTitleText</item>
-    </style>
-
-    <!-- Text in the action bar at the top of the screen -->
-    <style name="ActionBarTitleText"
-        parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/actionbar_text_color</item>
-    </style>
-
-    <!-- Text style for tabs. -->
-    <style name="ActionBarTabTextStyle"
-        parent="android:style/Widget.Material.Light.ActionBar.TabText">
-        <item name="android:textColor">@color/grey_100</item>
-        <item name="android:textSize">@dimen/tab_text_size</item>
-        <item name="android:fontFamily">@string/tab_font_family</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
 </resources>
