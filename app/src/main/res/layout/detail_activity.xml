@@ -25,18 +25,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="272dp" >
-
-            <com.original.abroadeasy.util.CustomerViewPager
-                android:id = "@+id/tab_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignWithParentIfMissing="true"
-                android:background="@android:color/white"/>
-
-            <!--<WebView
+            <WebView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/conent_webview"/>-->
+                android:id="@+id/conent_webview"/>
         </FrameLayout>
     </com.original.abroadeasy.widget.ListenableScrollView>
 
