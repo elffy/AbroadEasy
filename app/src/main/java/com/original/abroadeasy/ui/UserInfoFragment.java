@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.original.abroadeasy.R;
 import com.original.abroadeasy.model.UserInfo;
 import com.original.abroadeasy.network.weibo.AccessTokenKeeper;
 import com.original.abroadeasy.network.weibo.WBConstants;
+import com.original.abroadeasy.util.LogUtil;
 import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
@@ -33,16 +36,24 @@ import butterknife.OnClick;
 /**
  * Created by zengjinlong on 15-10-29.
  */
-public class UserInfoFragment extends BaseFragment {
+public class UserInfoFragment extends BaseFragment implements View.OnClickListener {
 
     private static final String SERVICE_TEL = "10010";
     private View mView;
-    @Bind(R.id.user_avatar)
-    ImageView mUserAvatar;
+    @Bind(R.id.user_info_page)
+    View mUserInfoPage;
+
     @Bind(R.id.user_name)
     TextView mUserNameView;
-    @Bind(R.id.login_layout)
-    View mLoginLayout;
+
+    @Bind(R.id.login_page)
+    ViewStub mLoginViewStub;
+
+    @Bind(R.id.signup_page)
+    ViewStub mSignUpViewStub;
+
+    private View mLoginView;
+    private View mSignUpView;
 
     private UserInfo mUserInfo;
 
@@ -68,8 +79,8 @@ public class UserInfoFragment extends BaseFragment {
         ButterKnife.bind(this, mView);
         mUserInfo = UserInfo.getLoggedInUser(mActivity);
         if (mUserInfo == null) {
-            mUserNameView.setVisibility(View.GONE);
-            mLoginLayout.setVisibility(View.VISIBLE);
+            mUserInfoPage.setVisibility(View.GONE);
+            inflateLoginView();
         } else {
             mUserNameView.setText(mUserInfo.getName());
         }
@@ -85,14 +96,41 @@ public class UserInfoFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    private View mLoginBtn;
+    private View mSignUpTip;
+    private View mForgetPwTip;
+    private void inflateLoginView() {
+        if (mLoginView == null) {
+            mLoginView = mLoginViewStub.inflate();
+            mLoginBtn = mLoginView.findViewById(R.id.btn_login);
+            mSignUpTip = mLoginView.findViewById(R.id.signup_tip);
+            mForgetPwTip = mLoginView.findViewById(R.id.forget_password_tip);
+            mLoginBtn.setOnClickListener(this);
+            mSignUpTip.setOnClickListener(this);
+            mForgetPwTip.setOnClickListener(this);
+        }
+    }
+
+    private void inflateSignUpView() {
+        if (mSignUpView == null) {
+            mSignUpView = mSignUpViewStub.inflate();
+            mSignUpView.findViewById(R.id.btn_singup).setOnClickListener(this);
+            mSignUpView.findViewById(R.id.signup_back).setOnClickListener(this);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         mUserInfo = UserInfo.getLoggedInUser(mActivity);
         if (mUserInfo == null) {
-            mUserNameView.setVisibility(View.GONE);
-            mLoginLayout.setVisibility(View.VISIBLE);
+            mUserInfoPage.setVisibility(View.GONE);
+            if (mLoginView == null) {
+                inflateLoginView();
+            }
+            mLoginView.setVisibility(View.VISIBLE);
         } else {
+            mUserInfoPage.setVisibility(View.VISIBLE);
             mUserNameView.setText(mUserInfo.getName());
         }
     }
@@ -108,70 +146,40 @@ public class UserInfoFragment extends BaseFragment {
         super.onDestroyView();
     }
 
-    @OnClick(R.id.setting)
-    void onSettingClick(View v) {
-        startActivity(new Intent(mActivity, SettingActivity.class));
+    @Override
+    public void onClick(View view) {
+        LogUtil.d("onClicked!!!!");
+        switch (view.getId()) {
+            case R.id.btn_login:
+                break;
+            case R.id.btn_singup:
+                break;
+            case R.id.signup_tip:
+                inflateSignUpView();
+                mSignUpView.setVisibility(View.VISIBLE);
+                mLoginView.setVisibility(View.GONE);
+                break;
+            case R.id.forget_password_tip:
+                break;
+            case R.id.signup_back:
+                backToLogin();
+                break;
+        }
     }
 
-    @OnClick(R.id.service_tel)
-    void onServiceClick(View v) {
-        Uri uri = Uri.parse("tel:" + SERVICE_TEL);
-        Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-        startActivity(intent);
+    @Override
+    public boolean handleBackKey() {
+        if (mSignUpView.getVisibility() == View.VISIBLE) {
+            backToLogin();
+            return true;
+        }
+        return false;
     }
 
-    @OnClick(R.id.user_avatar)
-    void onUserAvatarClick(View v) {
+    private void backToLogin() {
+        mSignUpView.setVisibility(View.GONE);
+        mLoginView.setVisibility(View.VISIBLE);
     }
-
-    @OnClick(R.id.btn_login)
-    void onLogingBtnClick(View v) {
-        popDialog(R.string.login);
-    }
-
-    @OnClick(R.id.btn_register)
-    void onRegisterBtnClick(View v) {
-        popDialog(R.string.register);
-    }
-
-    /*private void popDialog(int titleResId) {
-        final View loginLayout = mActivity.getLayoutInflater().inflate(R.layout.log_in_dialog_layout, null);
-        final AlertDialog dialog = new AlertDialog.Builder(mActivity)
-                .setTitle(titleResId)
-                .setView(loginLayout)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-
-                        *//* User clicked OK so do some stuff *//*
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                })
-                .show();
-        Button okBtn = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String userName = ((TextView) loginLayout.findViewById(R.id.username_edit))
-                        .getText().toString().trim();
-                String password = ((TextView) loginLayout.findViewById(R.id.password_edit))
-                        .getText().toString().trim();
-                if ("".equals(userName)) {
-                    return;
-                }
-                if ("".equals(password)) {
-                    return;
-                }
-                mUserInfo = new UserInfo(userName, password);
-                UserInfo.saveLoggedInUser(mActivity,mUserInfo);
-                mUserNameView.setVisibility(View.VISIBLE);
-                mUserNameView.setText(mUserInfo.getName());
-                dialog.dismiss();
-            }
-        });
-    }*/
 
     private void popDialog(int titleResId) {
         final View loginLayout = mActivity.getLayoutInflater().inflate(R.layout.third_log_in_dialog_layout, null);

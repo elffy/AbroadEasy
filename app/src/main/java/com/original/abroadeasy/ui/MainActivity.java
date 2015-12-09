@@ -201,6 +201,14 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
         LogUtil.d("totalMemory():" + Runtime.getRuntime().totalMemory());
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mCurrentFragment.handleBackKey()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
     private void switchToFragment(int id) {
         mCurrentFragment = (BaseFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAGS[id]);
         if (mCurrentFragment == null) {

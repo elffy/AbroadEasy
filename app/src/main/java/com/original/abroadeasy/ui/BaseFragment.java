@@ -28,6 +28,10 @@ public class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    public boolean handleBackKey() {
+        return false;
+    }
+
     public void onRefresh() {
         // implement by child who wants handle refresh.
     }

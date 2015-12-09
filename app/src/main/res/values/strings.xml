@@ -28,11 +28,18 @@
     <!-- String describing the icon used to start a voice search -->
     <string name="description_start_voice_search">Start voice search</string>
 
-    inside search. [CHAR LIMIT=NONE] -->
+    <!-- inside search. [CHAR LIMIT=NONE] -->
     <string name="action_menu_back_from_search">stop searching</string>
     <!--  String describing the icon used to clear the search field -->
     <string name="description_clear_search">Clear search</string>
 
+    <string name="user_name_hint">Username/Mobile</string>
+    <string name="password_hint">Password</string>
+    <string name="password_again_hint">Enter Password Again</string>
+    <string name="signup_hint">NEW? SIGN UP HERE</string>
+    <string name="forget_password_hint">Forget Password?</string>
+    <string name="welcome">Welcome</string>
+    <string name="get_started">GET STARTED</string>
 
     <!-- 获取 Token -->
     <string name="weibosdk_demo_obtain_token_via_sso_all_in_one">SSO 授权（ALL IN ONE）</string>
