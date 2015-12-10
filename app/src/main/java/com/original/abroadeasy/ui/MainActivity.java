@@ -1,12 +1,12 @@
 package com.original.abroadeasy.ui;
 
-import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -135,9 +135,10 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
         }
 
         //add by yangli
-        final ActionBar actionBar = getActionBar();
+        final ActionBar actionBar = getSupportActionBar();
+
         Log.d(TAG, "actionbar = " + actionBar);
-        /*actionBar.setCustomView(R.layout.find_search_edittext);
+        actionBar.setCustomView(R.layout.find_search_edittext);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setBackgroundDrawable(null);
 
@@ -160,7 +161,7 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
             public void onBackButtonClicked() {
                 onBackPressed();
             }
-        });*/
+        });
         //add end by yangli
         //Add the animation in the startup by yangli 2013.11.11 happy singles day
         TranslateAnimation alphaAnimation = new TranslateAnimation(0, 0, 0,
