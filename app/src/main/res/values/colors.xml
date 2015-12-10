@@ -520,4 +520,7 @@
     <color name="color_switch_thumb_normal">#ffbdbdbd</color>
     <color name="color_switch_thumb_on">#f39c12</color>
     <color name="color_list_selector_background">#4cf39c12</color>
+
+    <!-- Color for icons in the actionbar -->
+    <color name="actionbar_icon_color">#ffffff</color>
 </resources>

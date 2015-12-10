@@ -1,7 +1,7 @@
 package com.original.abroadeasy.ui;
 
+import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -20,8 +20,8 @@ public class SettingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_layout);
         ButterKnife.bind(this);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE);
+        ActionBar actionBar = getActionBar();
+        //actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE);
     }
 
     @Override
