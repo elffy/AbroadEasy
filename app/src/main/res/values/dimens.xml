@@ -13,16 +13,16 @@
     <dimen name="actionbar_contentInsetStart">72dp</dimen>
 
     <!-- Margin to the left and right of the search box. -->
-    <dimen name="search_margin_horizontal">8dp</dimen>
+    <dimen name="search_margin_horizontal">1dp</dimen>
     <!-- Margin above the search box. -->
     <dimen name="search_top_margin">8dp</dimen>
     <!-- Margin below the search box. -->
     <dimen name="search_bottom_margin">8dp</dimen>
     <dimen name="search_collapsed_text_size">14sp</dimen>
     <!-- Search box interior padding - left -->
-    <dimen name="search_box_left_padding">8dp</dimen>
+    <dimen name="search_box_left_padding">1dp</dimen>
     <!-- Search box interior padding - right -->
-    <dimen name="search_box_right_padding">8dp</dimen>
+    <dimen name="search_box_right_padding">1dp</dimen>
 
     <dimen name="search_box_search_icon_padding">2dp</dimen>
     <dimen name="search_box_collapsed_text_margin_left">22dp</dimen>
