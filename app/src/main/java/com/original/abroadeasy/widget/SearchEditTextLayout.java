@@ -39,7 +39,7 @@ public class SearchEditTextLayout extends FrameLayout {
     private int mLeftMargin;
     private int mRightMargin;
 
-    private float mCollapsedElevation;
+//    private float mCollapsedElevation;
 
     /* Subclass-visible for testing */
     protected boolean mIsExpanded = false;
@@ -86,7 +86,7 @@ public class SearchEditTextLayout extends FrameLayout {
         mLeftMargin = params.leftMargin;
         mRightMargin = params.rightMargin;
 
-        mCollapsedElevation = getElevation();
+//        mCollapsedElevation = getElevation();
 
         mCollapsed = findViewById(R.id.search_box_collapsed);
         mExpanded = findViewById(R.id.search_box_expanded);
@@ -181,14 +181,15 @@ public class SearchEditTextLayout extends FrameLayout {
 
         // Set 9-patch background. This owns the padding, so we need to restore the original values.
         int paddingTop = this.getPaddingTop();
-        int paddingStart = this.getPaddingStart();
+        int paddingStart = this.getPaddingLeft();
         int paddingBottom = this.getPaddingBottom();
-        int paddingEnd = this.getPaddingEnd();
+        int paddingEnd = this.getPaddingRight();
         setBackgroundResource(R.drawable.search_shadow);
-        setElevation(0);
-        setPaddingRelative(paddingStart, paddingTop, paddingEnd, paddingBottom);
+//        setElevation(0);
+//        setPaddingRelative(paddingStart, paddingTop, paddingEnd, paddingBottom);
+        setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom);
 
-        setElevation(0);
+//        setElevation(0);
         if (requestFocus) {
             mSearchView.requestFocus();
         }
@@ -210,7 +211,7 @@ public class SearchEditTextLayout extends FrameLayout {
         }
 
         mIsExpanded = false;
-        setElevation(mCollapsedElevation);
+//        setElevation(mCollapsedElevation);
         setBackgroundResource(R.drawable.rounded_corner);
     }
 
