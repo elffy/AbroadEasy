@@ -43,6 +43,8 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
     private EditText mSearchView;
     private View mVoiceSearchButton;
 
+    public static ActionBar actionBar;
+
     private String mSearchQuery;
 
     private ActionBarController mActionBarController;
@@ -102,15 +104,27 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
             public void onCheckedChanged(RadioGroup group, int checkId) {
                 switch (checkId) {
                     case R.id.tab_home:
+                        if (null != actionBar && true == actionBar.isShowing()) {
+                            actionBar.hide();
+                        }
                         switchToFragment(ID_HOME);
                         break;
                     case R.id.tab_find:
+                        if (null != actionBar && false == actionBar.isShowing()) {
+                            actionBar.show();
+                        }
                         switchToFragment(ID_FIND);
                         break;
                     case R.id.tab_blog:
+                        if (null != actionBar && true == actionBar.isShowing()) {
+                            actionBar.hide();
+                        }
                         switchToFragment(ID_BLOG);
                         break;
                     case R.id.tab_user_info:
+                        if (null != actionBar && true == actionBar.isShowing()) {
+                            actionBar.hide();
+                        }
                         switchToFragment(ID_USER);
                         break;
                 }
@@ -135,12 +149,14 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
         }
 
         //add by yangli
-        final ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
 
         Log.d(TAG, "actionbar = " + actionBar);
         actionBar.setCustomView(R.layout.find_search_edittext);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setBackgroundDrawable(null);
+        //hide it
+        actionBar.hide();
 
         mActionBarController = new ActionBarController(this,
                 (SearchEditTextLayout) actionBar.getCustomView());

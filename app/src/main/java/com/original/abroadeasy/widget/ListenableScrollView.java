@@ -13,7 +13,6 @@ public class ListenableScrollView extends android.support.v4.widget.NestedScroll
     public interface OnScrollChangedListener {
         void onScrollChanged(int x, int y, int oldx, int oldy);
     }
-
     private OnScrollChangedListener mOnScrollListener;
 
     public void setOnScrollListener(OnScrollChangedListener listener) {
