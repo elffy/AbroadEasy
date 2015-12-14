@@ -7,4 +7,17 @@
     <!-- Base application theme. -->
     <style name="Theme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
+
+    <style name="navigation_bottom_radio">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:paddingBottom">2.0dip</item>
+        <item name="android:paddingTop">2.0dip</item>
+        <item name="android:textSize">11dip</item>
+        <item name="android:textColor">@android:color/white</item>
+
+    </style>
 </resources>

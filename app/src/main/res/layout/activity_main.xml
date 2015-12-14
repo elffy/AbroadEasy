@@ -33,13 +33,13 @@
         app:layout_anchor="@id/swipe_refresh_layout"
         app:layout_anchorGravity="bottom|right"
         app:pressedTranslationZ="12dp"
-        app:rippleColor="#eb7e18" />
+        app:rippleColor="@color/orange_100" />
 
     <RadioGroup
         android:id="@+id/tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:background="@android:color/white"
+        android:layout_height="48dp"
+        android:background="@android:color/black"
         android:layout_gravity="bottom"
         android:gravity="center"
         app:layout_behavior="com.original.abroadeasy.widget.TabBarBehavior"
@@ -47,45 +47,26 @@
 
         <RadioButton
             android:id="@+id/tab_home"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="true"
+            style="@style/navigation_bottom_radio"
             android:drawableTop="@mipmap/ic_home"
-            android:gravity="center"
-            android:textSize="1px" />
+            android:text="@string/home" />
 
         <RadioButton
             android:id="@+id/tab_find"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="false"
             android:drawableTop="@mipmap/ic_find"
-            android:gravity="center"
-            android:textSize="1px" />
+            style="@style/navigation_bottom_radio"
+            android:text="@string/explore" />
 
         <RadioButton
             android:id="@+id/tab_blog"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
             android:drawableTop="@mipmap/ic_blog"
-            android:gravity="center"
-            android:textSize="1px" />
+            style="@style/navigation_bottom_radio"
+            android:text="@string/blog" />
 
         <RadioButton
             android:id="@+id/tab_user_info"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="false"
+            style="@style/navigation_bottom_radio"
             android:drawableTop="@mipmap/ic_user_info"
-            android:gravity="center"
-            android:textSize="1px" />
+            android:text="@string/profile" />
     </RadioGroup>
 </android.support.design.widget.CoordinatorLayout>

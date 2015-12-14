@@ -18,6 +18,10 @@
     <string name="way_log_in">choose any kind of login way</string>
     <string name="title_log_in">Login aE</string>
     <string name="setting_log_out">Log Out</string>
+    <string name="home">Home</string>
+    <string name="explore">Explore</string>
+    <string name="blog">Blog</string>
+    <string name="profile">Profile</string>
     <!-- The font-family to use for the text inside the searchbox.
          Do not translate. -->
     <string name="search_font_family">sans-serif</string>

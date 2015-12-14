@@ -125,10 +125,10 @@ public class DetailActivity extends BaseActivity {
     void onMessageBtnClicked(View v) {
     }
 
-    @OnClick(R.id.btn_back)
+    /*@OnClick(R.id.btn_back)
     void onBackClicked(View v) {
         finish();
-    }
+    }*/
 
     @OnClick(R.id.appointment_fab)
     void onFabClick(View v) {
