@@ -1,17 +1,20 @@
 package com.original.abroadeasy.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.original.abroadeasy.R;
+import com.original.abroadeasy.model.ProgramItem;
+import com.original.abroadeasy.util.LogUtil;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zengjinlong on 15-11-29.
@@ -21,34 +24,30 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int ITEM_TYPE_NORMAL = 0;
     private static final int ITME_TYPE_HEADER = 1;
     private Context mContext;
-    ArrayList<HomeItem> mData;
+    List<ProgramItem> mData;
     final LayoutInflater mLayoutInflater;
     private OnItemClickListener mItemClickListener;
+    private OnScrollListener mScrollListener;
     private RecyclerView.ViewHolder mHeaderViewHolder;
 
     public interface OnItemClickListener {
         void onItemClicked(View view, int postion);
     }
+    public interface OnScrollListener {
+        void onScrollToEnd();
+    }
 
-    public HomeListAdapter(Context context, LayoutInflater layoutInflater) {
+    public HomeListAdapter(Context context, LayoutInflater layoutInflater, List<ProgramItem> datas) {
         mContext = context;
-        mData = new ArrayList<HomeItem>();
+        mData = datas;
         mLayoutInflater = layoutInflater;
-        for (int i = 0; i < 20; i++) {
-            Drawable d;
-            if (i % 3 == 0) {
-                d = mContext.getResources().getDrawable(R.mipmap.pic1);
-            } else if (i % 3 == 1) {
-                d = mContext.getResources().getDrawable(R.mipmap.pic2);
-            } else {
-                d = mContext.getResources().getDrawable(R.mipmap.pic3);
-            }
-            mData.add(new HomeItem("this is item : " + i, d));
-        }
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mItemClickListener = listener;
+    }
+    public void setScrollListener(OnScrollListener listener) {
+        mScrollListener = listener;
     }
 
     public void setmHeaderViewHolder(RecyclerView.ViewHolder holder) {
@@ -66,6 +65,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+        LogUtil.d("onCreateViewHolder:" + viewType);
         if (viewType == ITEM_TYPE_NORMAL) {
             return new MyViewHolder(mItemClickListener,
                     mLayoutInflater.inflate(R.layout.home_item_view, parent, false));
@@ -76,23 +76,37 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position != 0) {
-            ((MyViewHolder)holder).bindTo(mData.get(position), position);
+        LogUtil.d("onBindViewHolder:" + position);
+        if (position > 0) {
+            if (position  == getItemCount() - 1 && mScrollListener != null) {
+                mScrollListener.onScrollToEnd();
+            }
+            MyViewHolder myHolder = (MyViewHolder)holder;
+            ProgramItem program = mData.get(position - 1);
+            myHolder.bindTo(program, position);
+            // TODO study about the cache strategy about Glide.
+            Glide.with(mContext)
+                    .load(program.image)
+                    .centerCrop()
+                    .into(myHolder.mImage);
         }
     }
 
     @Override
     public int getItemCount() {
+        if (mHeaderViewHolder != null) {
+            return mData.size() + 1;
+        }
         return mData.size();
     }
 
     private static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mText;
-        private ImageView mImage;
+        public ImageView mImage;
         private int mPostion;
         private OnItemClickListener mOnItemClickListener;
-        HomeItem mBoundItem;
+        private ProgramItem mBoundItem;
 
         public MyViewHolder(OnItemClickListener listener, View itemView) {
             super(itemView);
@@ -102,11 +116,11 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
             itemView.setOnClickListener(this);
         }
 
-        public void bindTo(HomeItem item, int postion) {
+        public void bindTo(ProgramItem item, int postion) {
             mBoundItem = item;
             mPostion = postion;
-            mText.setText(item.mText);
-            mImage.setImageDrawable(item.mPicture);
+            mText.setText(item.name);
+//            mImage.setImageDrawable(item.mPicture);
         }
 
         @Override
@@ -115,15 +129,5 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private static class HomeItem {
-        String mText;
-        Drawable mPicture;
-        private static int idCounter = 0;
-
-        public HomeItem(String text, Drawable d) {
-            mText = text;
-            mPicture = d;
-        }
-    }
 
 }

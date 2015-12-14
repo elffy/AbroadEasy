@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.original.abroadeasy.util.LogUtil;
+
 /**
  * Author:    Yangli
  * Version    V1.0
@@ -15,7 +17,7 @@ import android.net.NetworkInfo;
  * 15-11-23      yangli            1.0                    1.0
  * Why & What is modified:
  */
-public class AppNetworkInfo {
+public class NetworkUtil {
     /**
      * 网络是否可用
      *
@@ -28,7 +30,7 @@ public class AppNetworkInfo {
             NetworkInfo[] info = mgr.getAllNetworkInfo();
             if (info != null) {
                 for (NetworkInfo anInfo : info) {
-                    if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    if (anInfo.isConnected()) {
                         return true;
                     }
                 }

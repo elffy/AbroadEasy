@@ -1,7 +1,7 @@
 package com.original.abroadeasy.network.controller;
 
 import com.original.abroadeasy.app.App;
-import com.original.abroadeasy.network.AppNetworkInfo;
+import com.original.abroadeasy.network.NetworkUtil;
 import com.original.abroadeasy.network.callback.UiDisplayListener;
 
 /**
@@ -24,7 +24,7 @@ public abstract class BaseHttpController<T> {
     }
 
     public void loadData() {
-        if (AppNetworkInfo.isNetworkAvailable(App.getsContext())) {
+        if (NetworkUtil.isNetworkAvailable(App.getsContext())) {
             getNetData();
         } else {
             if (null != uiDisplayListener) {

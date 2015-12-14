@@ -80,7 +80,7 @@ public class TabBarBehavior extends CoordinatorLayout.Behavior<View> {
 
             @Override
             public void onAnimationCancel(Animator animator) {
-                show(view);
+//                show(view);
             }
 
             @Override
@@ -107,7 +107,7 @@ public class TabBarBehavior extends CoordinatorLayout.Behavior<View> {
 
             @Override
             public void onAnimationCancel(Animator animator) {
-                hide(view);
+//                hide(view);
             }
 
             @Override

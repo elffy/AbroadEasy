@@ -3,6 +3,7 @@ package com.original.abroadeasy.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,10 +22,15 @@ import android.widget.TextView;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.adapter.HomeListAdapter;
+import com.original.abroadeasy.app.App;
 import com.original.abroadeasy.model.HomeItem;
+import com.original.abroadeasy.model.ProgramItem;
+import com.original.abroadeasy.network.NetworkUtil;
+import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.widget.BannerGallery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -55,6 +61,7 @@ public class HomeFragment extends BaseFragment {
         mView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, mView);
         intiView();
+        initData();
         mHandler = new MyHandler();
         return mView;
     }
@@ -73,28 +80,35 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void onRefresh() {
-        mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_REFRESH, 0, 0), 1000);
+        mHandler.sendEmptyMessage(MSG_REFRESH);
     }
 
     private static final int MSG_REFRESH = 0;
+    private static final int MSG_LOAD_DONE = 1;
 
     private class MyHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            int what = msg.what;
-            if (MSG_REFRESH == what) {
-                if (msg.arg1 < 3) {
-                    msg.arg1++;
-                    sendMessageDelayed(mHandler.obtainMessage(MSG_REFRESH, msg.arg1 + 1, 0), 1000);
-                } else {
+            switch (msg.what) {
+                case MSG_LOAD_DONE:
                     setRefreshing(false);
-                }
+                    mLoadTask = null;
+                    if (mPendLoadType > 0) {
+                        mLoadTask = new LoadDataTask(mPendLoadType);
+                        mLoadTask.execute(mPendLoadType == LOAD_MORE ? mLoadIndex : 0);
+                        mPendLoadType = -1;
+                    }
+                    break;
+                case MSG_REFRESH:
+                    loadNew();
+                    break;
             }
         }
     }
 
     private LinearLayoutManager mLinearLayoutManager;
     private HomeListAdapter mAdapter;
+    private List<ProgramItem> mDatas = new ArrayList<ProgramItem>();
 
     private void intiView() {
 
@@ -104,7 +118,7 @@ public class HomeFragment extends BaseFragment {
         // init recyclerView.
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new HomeListAdapter(mActivity, mActivity.getLayoutInflater());
+        mAdapter = new HomeListAdapter(mActivity, mActivity.getLayoutInflater(), mDatas);
         mAdapter.setOnItemClickListener(new HomeListAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(View view, int postion) {
@@ -112,6 +126,12 @@ public class HomeFragment extends BaseFragment {
             }
         });
         mAdapter.setmHeaderViewHolder(mHeaderViewHolder);
+        mAdapter.setScrollListener(new HomeListAdapter.OnScrollListener() {
+            @Override
+            public void onScrollToEnd() {
+                loadMore();
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int mScrolledY = 0;
@@ -127,6 +147,83 @@ public class HomeFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    private static final int LOAD_MORE = 1;
+    private static final int LOAD_NEW= 2;
+    private int mPendLoadType = 0;
+    private List<ProgramItem> mNewPrograms;
+    private int mLoadIndex = 0;
+    private LoadDataTask mLoadTask;
+    private void initData() {
+        if (!NetworkUtil.isNetworkAvailable(mActivity)) {
+            // TODO add Toast
+            return;// network unavailable, just return;
+        }
+        mLoadTask = new LoadDataTask(LOAD_MORE);
+        mLoadTask.execute(mLoadIndex);
+    }
+
+    class LoadDataTask extends AsyncTask<Integer, Void, Void> {
+
+        private int mLoadType;
+        LoadDataTask(int type) {
+            mLoadType = type;
+        }
+
+        @Override
+        protected Void doInBackground(Integer[] params) {
+            int index = 0;
+            if (params != null && params.length > 0) {
+                index = params[0];
+            }
+            try {
+                mNewPrograms = App.getRetrofitService().getProgramList(index);
+            } catch (Exception e) {
+                LogUtil.e("doInBackground, Exception:" + e.toString());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void o) {
+            if (mNewPrograms != null && mNewPrograms.size() > 0) {
+                if (mLoadType == LOAD_NEW) {
+                    int oldFirstId = mDatas.get(0).id;
+                    for (ProgramItem item : mNewPrograms) {
+                        if (item.id < oldFirstId) {
+                            // add new items at head
+                            mDatas.add(0, item);
+                            mLoadIndex++;
+                        }
+                    }
+                } else {
+                    mLoadIndex += mNewPrograms.size();
+                    mDatas.addAll(mNewPrograms);
+                }
+                mNewPrograms.clear();
+                mAdapter.notifyDataSetChanged();
+            }
+            mHandler.sendEmptyMessage(MSG_LOAD_DONE);
+        }
+    }
+
+    private void loadMore() {
+        if (mLoadTask == null) {
+            mLoadTask = new LoadDataTask(LOAD_MORE);
+            mLoadTask.execute(mLoadIndex);
+        } else {
+            mPendLoadType = LOAD_MORE;
+        }
+    }
+
+    private void loadNew() {
+        if (mLoadTask == null) {
+            mLoadTask = new LoadDataTask(LOAD_NEW);
+            mLoadTask.execute(0);
+        } else {
+            mPendLoadType = LOAD_NEW;
+        }
     }
 
     private void startDetailActivity() {

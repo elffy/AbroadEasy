@@ -10,5 +10,5 @@ import java.io.Serializable;
  * Created by zengjinlong on 15-11-28.
  */
 public class BaseModel implements Serializable {
-    @PrimaryKey(AssignType.AUTO_INCREMENT) @Column("_id") protected long id;
+    @PrimaryKey(AssignType.AUTO_INCREMENT) @Column("_id") protected long _id;
 }
