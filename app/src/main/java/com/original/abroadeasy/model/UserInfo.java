@@ -3,6 +3,7 @@ package com.original.abroadeasy.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.original.abroadeasy.ui.UserInfoFragment;
 import com.original.abroadeasy.util.PreferenceUtils;
 
 /**
@@ -55,5 +56,21 @@ public class UserInfo {
     public static void logOut(Context context) {
         SharedPreferences sp = PreferenceUtils.getSharedPreferences(context);
         sp.edit().putString(USER_INFO, "").commit();
+    }
+
+    public static String getLoginTag(int type) {
+        String tagName;
+        switch (type) {
+            case UserInfoFragment.LOGIN_TYPE_WEIBO:
+                tagName = "SinaWeibo";
+                break;
+            case UserInfoFragment.LOGIN_TYPE_FACEBOOK:
+                tagName = "Facebook";
+                break;
+            default:
+                tagName = "Unavailable";
+        }
+
+        return  tagName;
     }
 }

@@ -16,6 +16,7 @@ import com.squareup.okhttp.OkHttpClient;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import cn.sharesdk.framework.ShareSDK;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
@@ -35,6 +36,8 @@ public class App extends Application {
         sContext = getApplicationContext();
         setUpApiService();
 
+        //Init the Mob SDK by yangli 2015.12.14
+        ShareSDK.initSDK(this);
     }
 
     private void setUpApiService() {
@@ -69,5 +72,12 @@ public class App extends Application {
 
     public static AppApiService getsAppApiService() {
         return sAppApiService;
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+
+        ShareSDK.stopSDK(this);
     }
 }

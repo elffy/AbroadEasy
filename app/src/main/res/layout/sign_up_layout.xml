@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/sign_up_bg">
+    android:background="@mipmap/sign_up_bg"
+    tools:showIn="@layout/fragment_user_info">
     <ImageView
         android:id="@+id/signup_back"
         android:layout_height="20dp"
@@ -96,11 +98,13 @@
             android:textColor="@android:color/white"
             android:background="@mipmap/long_button_bg" />
         <ImageView
+            android:id="@+id/weibo_singup"
             android:layout_height="wrap_content"
             android:layout_width="280dp"
             android:layout_marginTop="16dp"
-            android:src="@mipmap/wechat_btn" />
+            android:src="@mipmap/weibo_btn" />
         <ImageView
+            android:id="@+id/facebook_singup"
             android:layout_height="100px"
             android:layout_width="280dp"
             android:layout_marginTop="16dp"
