@@ -36,7 +36,9 @@ public class BaseFragment extends Fragment {
         // implement by child who wants handle refresh.
     }
     public void setRefreshing(boolean refreshing) {
-        mSwipeRefreshLayout.setRefreshing(refreshing);
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(refreshing);
+        }
     }
     public void setSwipeEnable(boolean enable) {
         mSwipeRefreshLayout.setEnabled(enable);

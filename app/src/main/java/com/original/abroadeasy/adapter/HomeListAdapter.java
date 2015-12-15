@@ -1,8 +1,7 @@
 package com.original.abroadeasy.adapter;
 
-import android.content.Context;
+import android.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private static final int ITEM_TYPE_NORMAL = 0;
     private static final int ITME_TYPE_HEADER = 1;
-    private Context mContext;
+    private Fragment mFragment;
     List<ProgramItem> mData;
     final LayoutInflater mLayoutInflater;
     private OnItemClickListener mItemClickListener;
@@ -37,8 +36,8 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         void onScrollToEnd();
     }
 
-    public HomeListAdapter(Context context, LayoutInflater layoutInflater, List<ProgramItem> datas) {
-        mContext = context;
+    public HomeListAdapter(Fragment fragment, LayoutInflater layoutInflater, List<ProgramItem> datas) {
+        mFragment = fragment;
         mData = datas;
         mLayoutInflater = layoutInflater;
     }
@@ -85,7 +84,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
             ProgramItem program = mData.get(position - 1);
             myHolder.bindTo(program, position);
             // TODO study about the cache strategy about Glide.
-            Glide.with(mContext)
+            Glide.with(mFragment)
                     .load(program.image)
                     .centerCrop()
                     .into(myHolder.mImage);

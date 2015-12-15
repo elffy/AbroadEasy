@@ -61,7 +61,6 @@ public class HomeFragment extends BaseFragment {
         mView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, mView);
         intiView();
-        initData();
         mHandler = new MyHandler();
         return mView;
     }
@@ -69,6 +68,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initData();
     }
 
     @Override
@@ -91,7 +91,12 @@ public class HomeFragment extends BaseFragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_LOAD_DONE:
-                    setRefreshing(false);
+                    postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            setRefreshing(false);
+                        }
+                    }, 200);
                     mLoadTask = null;
                     if (mPendLoadType > 0) {
                         mLoadTask = new LoadDataTask(mPendLoadType);
@@ -118,7 +123,7 @@ public class HomeFragment extends BaseFragment {
         // init recyclerView.
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new HomeListAdapter(mActivity, mActivity.getLayoutInflater(), mDatas);
+        mAdapter = new HomeListAdapter(this, mActivity.getLayoutInflater(), mDatas);
         mAdapter.setOnItemClickListener(new HomeListAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(View view, int postion) {
@@ -172,6 +177,13 @@ public class HomeFragment extends BaseFragment {
         }
 
         @Override
+        protected void onPreExecute() {
+            if (mLoadType == LOAD_MORE) {
+                setRefreshing(true);
+            }
+        }
+
+        @Override
         protected Void doInBackground(Integer[] params) {
             int index = 0;
             if (params != null && params.length > 0) {
@@ -188,7 +200,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         protected void onPostExecute(Void o) {
             if (mNewPrograms != null && mNewPrograms.size() > 0) {
-                if (mLoadType == LOAD_NEW) {
+                if (mLoadType == LOAD_NEW && mDatas.size() > 0) {
                     int oldFirstId = mDatas.get(0).id;
                     for (ProgramItem item : mNewPrograms) {
                         if (item.id < oldFirstId) {
