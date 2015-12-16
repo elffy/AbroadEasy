@@ -32,6 +32,7 @@ import retrofit.converter.GsonConverter;
 public class App extends Application {
     private static Context sContext;
     private static RetrofitService sRetrofitService;
+    public static int sScreenHeight;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -40,6 +41,7 @@ public class App extends Application {
 //        LiteOrmDBUtil.test();
         sContext = getApplicationContext();
         initRetrofitService();
+        sScreenHeight = getResources().getDisplayMetrics().heightPixels;
 
         //Init the Mob SDK by yangli 2015.12.14
         ShareSDK.initSDK(this);
