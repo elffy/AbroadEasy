@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.original.abroadeasy.R;
-import com.original.abroadeasy.model.UserInfo;
+import com.original.abroadeasy.model.UserAccount;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -46,6 +46,6 @@ public class SettingActivity extends BaseActivity {
 
     @OnClick(R.id.log_out)
     void onLogOutClick(View v) {
-        UserInfo.logOut(this);
+        UserAccount.logOut(this);
     }
 }

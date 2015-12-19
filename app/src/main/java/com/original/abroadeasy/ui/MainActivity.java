@@ -20,6 +20,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import com.kf5sdk.init.KF5SDKConfig;
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.util.PreferenceUtils;
@@ -197,8 +198,7 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
     @OnClick(R.id.fab)
     public void onFabClick(View v) {
         LogUtil.d("FAB clicked!!");
-        LogUtil.d("maxMemory():" + Runtime.getRuntime().maxMemory());
-        LogUtil.d("totalMemory():" + Runtime.getRuntime().totalMemory());
+        KF5SDKConfig.INSTANCE.startFeedBackActivity(MainActivity.this);
     }
 
     @Override

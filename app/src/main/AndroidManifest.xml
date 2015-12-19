@@ -13,6 +13,11 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
 
+    <!-- these permissions are needed by KF5 SDK -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -40,6 +45,7 @@
             android:label="@string/action_settings" >
         </activity>
 
+        <!-- Add these Mob ShareSdk begin: -->
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
@@ -53,6 +59,52 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-    </application>
+        <!-- Add these Mob ShareSdk :end -->
 
+        <!-- Add these for KF5 SDK begin: -->
+        <activity
+            android:name="com.chosen.kf5sdk.FeedBackActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.chosen.kf5sdk.FeedBackDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.chosen.kf5sdk.HelpCenterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.chosen.kf5sdk.HelpCenterTypeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.chosen.kf5sdk.HelpCenterTypeChildActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.chosen.kf5sdk.HelpCenterTypeDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:hardwareAccelerated="true" >
+        </activity>
+        <activity
+            android:name="com.chosen.kf5sdk.LookFeedBackActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.chosen.kf5sdk.ImageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.chosen.kf5sdk.OrderAttributeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.chosen.kf5sdk.LinkUrlActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:hardwareAccelerated="true" >
+        </activity>
+        <!-- Add these for KF5 SDK :end-->
+
+    </application>
 </manifest>

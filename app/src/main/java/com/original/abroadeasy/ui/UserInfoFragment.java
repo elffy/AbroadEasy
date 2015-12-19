@@ -8,13 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.login.LoginApi;
 import com.original.abroadeasy.login.OnLoginListener;
-import com.original.abroadeasy.model.UserInfo;
+import com.original.abroadeasy.model.UserAccount;
 import com.original.abroadeasy.util.LogUtil;
 
 import java.util.HashMap;
@@ -44,7 +43,7 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
     private View mLoginView;
     private View mSignUpView;
 
-    private UserInfo mUserInfo;
+    private UserAccount mUserAccount;
 
     public final static int LOGIN_TYPE_WEIBO = 1;
     public final static int LOGIN_TYPE_FACEBOOK = 2;
@@ -58,12 +57,12 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_user_info, container, false);
         ButterKnife.bind(this, mView);
-        mUserInfo = UserInfo.getLoggedInUser(mActivity);
-        if (mUserInfo == null) {
+        mUserAccount = UserAccount.getLoggedInUser(mActivity);
+        if (mUserAccount == null) {
             mUserInfoPage.setVisibility(View.GONE);
             inflateLoginView();
         } else {
-            mUserNameView.setText(mUserInfo.getName());
+            mUserNameView.setText(mUserAccount.getName());
         }
 
         return mView;
@@ -104,8 +103,8 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
-        mUserInfo = UserInfo.getLoggedInUser(mActivity);
-        if (mUserInfo == null) {
+        mUserAccount = UserAccount.getLoggedInUser(mActivity);
+        if (mUserAccount == null) {
             mUserInfoPage.setVisibility(View.GONE);
             if (mLoginView == null) {
                 inflateLoginView();
@@ -113,7 +112,7 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
             mLoginView.setVisibility(View.VISIBLE);
         } else {
             mUserInfoPage.setVisibility(View.VISIBLE);
-            mUserNameView.setText(mUserInfo.getName());
+            mUserNameView.setText(mUserAccount.getName());
         }
     }
 
@@ -147,10 +146,10 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
                 backToLogin();
                 break;
             case R.id.weibo_singup:
-                login(UserInfo.getLoginTag(LOGIN_TYPE_WEIBO));
+                login(UserAccount.getLoginTag(LOGIN_TYPE_WEIBO));
                 break;
             case R.id.facebook_singup:
-                login(UserInfo.getLoginTag(LOGIN_TYPE_FACEBOOK));
+                login(UserAccount.getLoginTag(LOGIN_TYPE_FACEBOOK));
                 break;
         }
     }
@@ -166,7 +165,7 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
                 return true;
             }
 
-            public boolean onRegister(UserInfo info) {
+            public boolean onRegister(UserAccount info) {
                 // 填写处理注册信息的代码，返回true表示数据合法，注册页面可以关闭
                 return true;
             }
@@ -216,10 +215,10 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
                 if ("".equals(password)) {
                     return;
                 }
-                mUserInfo = new UserInfo(userName, password);
-                UserInfo.saveLoggedInUser(mActivity, mUserInfo);
+                mUserAccount = new UserAccount(userName, password);
+                UserAccount.saveLoggedInUser(mActivity, mUserAccount);
                 mUserNameView.setVisibility(View.VISIBLE);
-                mUserNameView.setText(mUserInfo.getName());
+                mUserNameView.setText(mUserAccount.getName());
                 dialog.dismiss();
             }
         });

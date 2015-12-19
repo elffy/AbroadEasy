@@ -7,7 +7,13 @@ import android.content.res.Configuration;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.bind.DateTypeAdapter;
+import com.kf5sdk.api.CallBack;
+import com.kf5sdk.init.KF5SDKConfig;
+import com.kf5sdk.init.KF5SDKInitializer;
+import com.kf5sdk.init.UserInfo;
+import com.kf5sdk.utils.SDKPreference;
 import com.original.abroadeasy.BuildConfig;
+import com.original.abroadeasy.model.UserAccount;
 import com.original.abroadeasy.network.RetrofitService;
 import com.original.abroadeasy.util.LiteOrmDBUtil;
 import com.original.abroadeasy.util.LogUtil;
@@ -45,6 +51,28 @@ public class App extends Application {
 
         //Init the Mob SDK by yangli 2015.12.14
         ShareSDK.initSDK(this);
+
+        // Init the KF5 SDK
+        initForKF5();
+    }
+
+    private void initForKF5() {
+        KF5SDKInitializer.initialize(this);
+        // init User for KF5 SDK. TODO, complete it later
+        UserInfo userInfo = UserAccount.getKF5TestUser();
+        KF5SDKConfig.INSTANCE.init(this, userInfo, new CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                LogUtil.d("onSuccess:" + s);
+            }
+
+            @Override
+            public void onFailure(String s) {
+                LogUtil.d("onFailure:" + s);
+            }
+        });
+        // TODO, just for test, remove it later.
+        SDKPreference.setLoginSuccess(true, this);
     }
 
     private void initRetrofitService() {

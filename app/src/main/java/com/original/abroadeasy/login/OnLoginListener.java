@@ -1,6 +1,6 @@
 package com.original.abroadeasy.login;
 
-import com.original.abroadeasy.model.UserInfo;
+import com.original.abroadeasy.model.UserAccount;
 
 import java.util.HashMap;
 
@@ -23,6 +23,6 @@ public interface OnLoginListener {
 	 * 息是否合法。若合法，则调用自身应用的注册服务进入注册流程并返回true以关闭注册页
 	 * 面，否则注册页将不会关闭，用户需要修改注册信息
 	 */
-	public boolean onRegister(UserInfo info);
+	public boolean onRegister(UserAccount info);
 
 }
