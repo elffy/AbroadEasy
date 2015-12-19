@@ -79,7 +79,7 @@ public class UserAccount {
     public static UserInfo getKF5TestUser() {
         UserInfo user = new UserInfo();
         user.email = "test@abroadeasy.com";
-        user.appId = "132euoadslfjasldfsadg";
+        user.appId = "001567280d15a34bd56a122559a724debcc8312731b40ca6";
         user.password = "123456";
         user.helpAddress = "helptest.kf5.com";
         user.name = "testHaha";
