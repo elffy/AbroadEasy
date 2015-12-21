@@ -508,13 +508,13 @@
     <color name="g_primary_color">#ff6200</color>
     <color name="primary_from_color">#ffffffff</color>
     
-    <color name="giga_hansong_theme_color">#ef9b1d</color>
-    <color name="giga_hansong_theme_text">#513a17</color>
-    <color name="giga_hansong_theme_background">#f39c12</color>
-    <color name="giga_hansong_bottom_textcolor">#cf6e16</color>
+    <color name="ae_theme_color">#ef9b1d</color>
+    <color name="ae_theme_text">#513a17</color>
+    <color name="ae_theme_background">#f39c12</color>
+    <color name="ae_bottom_textcolor">#cf6e16</color>
     
     <color name="transparent">#0000</color>
-    <color name="giga_pager_title_unselected">#99ffffff</color>
+    <color name="ae_pager_title_unselected">#99ffffff</color>
     <color name="g_button_text_color">#ffffff</color>
     
     <color name="color_switch_thumb_normal">#ffbdbdbd</color>

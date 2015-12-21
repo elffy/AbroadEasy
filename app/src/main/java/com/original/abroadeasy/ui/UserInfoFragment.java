@@ -20,6 +20,8 @@ import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * Created by zengjinlong on 15-10-29.
@@ -95,7 +97,7 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
             mSignUpView.findViewById(R.id.signup_back).setOnClickListener(this);
             //Add by yangli
             mSignUpView.findViewById(R.id.weibo_singup).setOnClickListener(this);
-            mSignUpView.findViewById(R.id.facebook_singup).setOnClickListener(this);
+            mSignUpView.findViewById(R.id.wechat_singup).setOnClickListener(this);
             //Add by yangli end
         }
     }
@@ -146,10 +148,10 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
                 backToLogin();
                 break;
             case R.id.weibo_singup:
-                login(UserAccount.getLoginTag(LOGIN_TYPE_WEIBO));
+                login(SinaWeibo.NAME);
                 break;
-            case R.id.facebook_singup:
-                login(UserAccount.getLoginTag(LOGIN_TYPE_FACEBOOK));
+            case R.id.wechat_singup:
+                login(Wechat.NAME);
                 break;
         }
     }

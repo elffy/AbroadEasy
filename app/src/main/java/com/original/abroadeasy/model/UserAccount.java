@@ -61,21 +61,6 @@ public class UserAccount {
         sp.edit().putString(USER_INFO, "").commit();
     }
 
-    public static String getLoginTag(int type) {
-        String tagName;
-        switch (type) {
-            case UserInfoFragment.LOGIN_TYPE_WEIBO:
-                tagName = "SinaWeibo";
-                break;
-            case UserInfoFragment.LOGIN_TYPE_FACEBOOK:
-                tagName = "Facebook";
-                break;
-            default:
-                tagName = "Unavailable";
-        }
-
-        return  tagName;
-    }
     public static UserInfo getKF5TestUser() {
         UserInfo user = new UserInfo();
         user.email = "test@abroadeasy.com";

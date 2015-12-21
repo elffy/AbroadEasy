@@ -44,11 +44,11 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
     private EditText mSearchView;
     private View mVoiceSearchButton;
 
-    public static ActionBar actionBar;
+    //public static ActionBar actionBar;
 
     private String mSearchQuery;
 
-    private ActionBarController mActionBarController;
+    //private ActionBarController mActionBarController;
 
     @Bind(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipRefreshLayout;
@@ -59,15 +59,15 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
     /**
      * Open the search UI when the user clicks on the search box.
      */
-    private final View.OnClickListener mSearchViewOnClickListener = new View.OnClickListener() {
+    /*private final View.OnClickListener mSearchViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (!isInSearchUi()) {
                 mActionBarController.onSearchBoxTapped();
-                enterSearchUi(false /* smartSearch */, mSearchView.getText().toString());
+                enterSearchUi(false *//* smartSearch *//*, mSearchView.getText().toString());
             }
         }
-    };
+    };*/
 
     /**
      * Listener used to send search queries to the find search fragment.
@@ -105,27 +105,15 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
             public void onCheckedChanged(RadioGroup group, int checkId) {
                 switch (checkId) {
                     case R.id.tab_home:
-                        if (null != actionBar && true == actionBar.isShowing()) {
-                            actionBar.hide();
-                        }
                         switchToFragment(ID_HOME);
                         break;
                     case R.id.tab_find:
-                        if (null != actionBar && false == actionBar.isShowing()) {
-                            actionBar.show();
-                        }
                         switchToFragment(ID_FIND);
                         break;
                     case R.id.tab_blog:
-                        if (null != actionBar && true == actionBar.isShowing()) {
-                            actionBar.hide();
-                        }
                         switchToFragment(ID_BLOG);
                         break;
                     case R.id.tab_user_info:
-                        if (null != actionBar && true == actionBar.isShowing()) {
-                            actionBar.hide();
-                        }
                         switchToFragment(ID_USER);
                         break;
                 }
@@ -137,7 +125,7 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
                 mCurrentFragment.onRefresh();
             }
         });
-        mSwipRefreshLayout.setColorSchemeColors(Color.RED, Color.YELLOW, Color.GREEN);
+        mSwipRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.ae_theme_color));
         switchToFragment(ID_HOME);
         if (PreferenceUtils.isFirstLaunch(this)) {
             Snackbar.make(mSwipRefreshLayout, R.string.tip_pull_to_refresh, Snackbar.LENGTH_INDEFINITE)
@@ -150,7 +138,7 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
         }
 
         //add by yangli
-        actionBar = getSupportActionBar();
+        /*actionBar = getSupportActionBar();
 
         Log.d(TAG, "actionbar = " + actionBar);
         actionBar.setCustomView(R.layout.find_search_edittext);
@@ -178,7 +166,7 @@ public class MainActivity extends BaseActivity implements ActionBarController.Ac
             public void onBackButtonClicked() {
                 onBackPressed();
             }
-        });
+        });*/
         //add end by yangli
         //Add the animation in the startup by yangli 2013.11.11 happy singles day
         TranslateAnimation alphaAnimation = new TranslateAnimation(0, 0, 0,
