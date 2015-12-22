@@ -20,4 +20,12 @@
         <item name="android:textColor">@android:color/white</item>
 
     </style>
+
+    <!-- Text style for tabs. -->
+    <style name="ActionBarTabTextStyle" >
+        <item name="android:textColor">@color/tab_title_text_color</item>
+        <item name="android:textSize">@dimen/tab_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

@@ -45,6 +45,9 @@
     <string name="welcome">Welcome</string>
     <string name="get_started">GET STARTED</string>
 
+    <!-- The font-family to use for tab text. Do not translate. -->
+    <string name="tab_font_family">sans-serif</string>
+
     <!-- 获取 Token -->
     <string name="weibosdk_demo_obtain_token_via_sso_all_in_one">SSO 授权（ALL IN ONE）</string>
     <string name="weibosdk_demo_obtain_token_via_web">SSO 授权（Web）</string>
@@ -71,5 +74,11 @@
     <string name="weibosdk_demo_toast_obtain_code_success">获取 Code 成功</string>
     <string name="weibosdk_demo_toast_obtain_code_failed">获取 Code 失败</string>
     <string name="weibosdk_demo_toast_obtain_token_success">获取 Token 成功</string>
-    <string name="weibosdk_demo_toast_obtain_token_failed">获取 Token 失败</string>\
+    <string name="weibosdk_demo_toast_obtain_token_failed">获取 Token 失败</string>
+
+    <string name="tab_title_intro">Intro</string>
+    <string name="tab_title_detail">Detail</string>
+    <string name="tab_title_price">Price</string>
+    <string name="tab_title_comment">Comment</string>
+
 </resources>

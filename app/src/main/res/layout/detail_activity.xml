@@ -22,7 +22,7 @@
             android:scaleType="centerCrop"
             android:id="@+id/detail_pic" />
 
-        <LinearLayout
+<!--        <LinearLayout
             android:id="@+id/middle_btns_layout"
             android:layout_width="match_parent"
             android:layout_height="42dp"
@@ -53,7 +53,15 @@
                 android:layout_weight="1"
                 android:src="@mipmap/article_question"
                 android:id="@+id/btn_question" />
-        </LinearLayout>
+        </LinearLayout>-->
+        <com.original.abroadeasy.widget.ViewPagerTabs
+            android:id="@+id/pager_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tab_height"
+            android:layout_marginTop="230dp"
+            android:textAllCaps="true"
+            style="@style/ActionBarTabTextStyle" />
+
     </FrameLayout>
 
     <RadioGroup

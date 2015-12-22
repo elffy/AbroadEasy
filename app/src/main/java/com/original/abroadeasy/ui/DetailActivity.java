@@ -5,13 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.util.LogUtil;
+import com.original.abroadeasy.widget.ViewPagerTabs;
 import com.original.abroadeasy.widget.ListenableListView;
 
 import java.util.ArrayList;
@@ -32,12 +32,15 @@ public class DetailActivity extends BaseActivity {
     View mCoverLayout;
     @Bind(R.id.detail_pic)
     ImageView mPicture;
-    @Bind(R.id.middle_btns_layout)
-    View mMiddleBars;
+//    @Bind(R.id.middle_btns_layout)
+//    View mMiddleBars;
     @Bind(R.id.view_pager)
     ViewPager mViewPager;
+    @Bind(R.id.pager_tabs)
+    ViewPagerTabs mViewPagerTabs;
 
     PagerAdapter mPagerAdapter;
+    private String[] mTabTitles;
     DetailBaseFragment mCurrentFragment;
 
     private static final int IMAGE_LAYOUT_HEIGHT = 690;// define in the dimens/
@@ -50,7 +53,6 @@ public class DetailActivity extends BaseActivity {
                 return;
             }
             mLastScrollY = scrollY;
-            LogUtil.d("onYscrolled:" + scrollY);
             if (scrollY > -IMAGE_LAYOUT_HEIGHT) {
                 mCoverLayout.setTranslationY(scrollY);
                 mPicture.setTranslationY(-scrollY/2);
@@ -66,29 +68,33 @@ public class DetailActivity extends BaseActivity {
         setContentView(R.layout.detail_activity);
         ButterKnife.bind(this);
 
+        mTabTitles = new String[] {getString(R.string.tab_title_intro), getString(R.string.tab_title_detail),
+                getString(R.string.tab_title_price), getString(R.string.tab_title_comment)};
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                LogUtil.d("onPageScrolled, position:" + position + ",positionOffset:" + positionOffset);
+                mViewPagerTabs.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
 
             @Override
             public void onPageSelected(int position) {
-                ((ListenableListView)mCurrentFragment.getListView()).setScrollListener(null);
+                ((ListenableListView) mCurrentFragment.getListView()).setScrollListener(null);
                 mCurrentFragment = (DetailBaseFragment) mPagerAdapter.getItem(position);
                 ListView listView = mCurrentFragment.getListView();
-                ((ListenableListView)listView).setScrollListener(mOnListScrollListener);
+                ((ListenableListView) listView).setScrollListener(mOnListScrollListener);
                 float scrolledY = mCoverLayout.getTranslationY();
                 if (scrolledY != 0) {
-                    listView.setSelectionFromTop(0, (int)scrolledY);
+                    listView.setSelectionFromTop(0, (int) scrolledY);
                 }
+                mViewPagerTabs.onPageSelected(position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                mViewPagerTabs.onPageScrollStateChanged(state);
             }
         });
+
         DetailBaseFragment fragmentMain1 = new DetailFragmentMain();
         DetailBaseFragment fragmentMain2 = new DetailFragmentMain();
         DetailBaseFragment fragment3 = new DetailFragmentSimple();
@@ -98,9 +104,11 @@ public class DetailActivity extends BaseActivity {
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager(),
                 fragmentMain1, fragmentMain2, fragment3, fragment4);
         mViewPager.setAdapter(mPagerAdapter);
+
+        mViewPagerTabs.setViewPager(mViewPager);
     }
 
-    private static class PagerAdapter extends FragmentPagerAdapter {
+    private class PagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments;
 
         public PagerAdapter(FragmentManager fm, Fragment... fragments) {
@@ -122,6 +130,19 @@ public class DetailActivity extends BaseActivity {
             return mFragments.size();
         }
 
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTabTitles[position];
+        }
+
+//        @Override
+//        public void destroyItem(ViewGroup container, int position, Object object) {
+//            if (null == mCurTransaction) {
+//                mCurTransaction = mFragmentManager.beginTransaction();
+//            }
+//            mCurTransaction.hide((Fragment) object);
+//        }
+
     }
 
     @Override
@@ -137,22 +158,6 @@ public class DetailActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-    }
-
-    @OnClick(R.id.btn_heart)
-    void onHeartBtnClicked(View v) {
-    }
-
-    @OnClick(R.id.btn_star)
-    void onStarBtnClicked(View v) {
-    }
-
-    @OnClick(R.id.btn_more)
-    void onMoreBtnClicked(View v) {
-    }
-
-    @OnClick(R.id.btn_question)
-    void onQuestionBtnClicked(View v) {
     }
 
     @OnClick(R.id.btn_setting)
