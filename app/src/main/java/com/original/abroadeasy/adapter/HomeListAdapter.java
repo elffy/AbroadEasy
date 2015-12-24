@@ -101,7 +101,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView mText;
+        //private TextView mText;
         public ImageView mImage;
         private int mPostion;
         private OnItemClickListener mOnItemClickListener;
@@ -110,7 +110,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         public MyViewHolder(OnItemClickListener listener, View itemView) {
             super(itemView);
             mOnItemClickListener = listener;
-            mText = (TextView) itemView.findViewById(R.id.item_text);
+            //mText = (TextView) itemView.findViewById(R.id.item_text);
             mImage = (ImageView) itemView.findViewById(R.id.item_image);
             itemView.setOnClickListener(this);
         }
@@ -118,8 +118,8 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         public void bindTo(ProgramItem item, int postion) {
             mBoundItem = item;
             mPostion = postion;
-            mText.setText(item.name);
-//            mImage.setImageDrawable(item.mPicture);
+            //mText.setText(item.name);
+            //mImage.setImageDrawable(item.mPicture);
         }
 
         @Override
