@@ -17,48 +17,57 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:src="@mipmap/detail_person"
+            android:layout_height="200dp"
+            android:src="@mipmap/image_detail_cover"
             android:scaleType="centerCrop"
             android:id="@+id/detail_pic" />
 
-<!--        <LinearLayout
+        <LinearLayout
             android:id="@+id/middle_btns_layout"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_marginTop="230dp"
-            android:background="@android:color/white"
-            android:orientation="horizontal" >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="#00000000"
+            android:orientation="horizontal"
+            android:layout_gravity="right">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@mipmap/article_heart"
+                android:layout_marginRight="16dp"
+                android:src="@mipmap/image_detail_favorite"
+                android:layout_gravity="center_vertical"
                 android:id="@+id/btn_heart" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@mipmap/article_more"
+                android:layout_marginRight="6dp"
+                android:src="@mipmap/image_detail_share"
+                android:layout_gravity="center_vertical"
                 android:id="@+id/btn_more" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/article_star"
-                android:id="@+id/btn_star" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/article_question"
-                android:id="@+id/btn_question" />
-        </LinearLayout>-->
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="151dp"
+            android:layout_marginLeft="6dp"
+            android:text="Program title and location"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="161dp"
+            android:layout_marginLeft="275dp"
+            android:background="@mipmap/image_detail_avail"/>
+
         <com.original.abroadeasy.widget.ViewPagerTabs
             android:id="@+id/pager_tabs"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_height"
-            android:layout_marginTop="230dp"
+            android:layout_marginTop="200dp"
             android:textAllCaps="true"
             style="@style/ActionBarTabTextStyle" />
 
@@ -70,24 +79,25 @@
         android:layout_height="48dp"
         android:background="@android:color/black"
         android:layout_gravity="bottom"
-        android:gravity="center"
+        android:gravity="center_vertical"
         app:layout_behavior="com.original.abroadeasy.widget.TabBarBehavior"
         android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/btn_phone"
+            android:drawableTop="@mipmap/ic_phone"
+            style="@style/navigation_bottom_radio" />
+
 
         <RadioButton
             android:id="@+id/btn_setting"
             style="@style/navigation_bottom_radio"
-            android:drawableTop="@mipmap/ic_setting" />
+            android:drawableTop="@mipmap/ic_unknown" />
 
         <RadioButton
             android:id="@+id/btn_message"
             android:drawableTop="@mipmap/ic_message"
             style="@style/navigation_bottom_radio" />
 
-        <RadioButton
-            android:id="@+id/btn_phone"
-            android:drawableTop="@mipmap/ic_phone"
-            style="@style/navigation_bottom_radio" />
     </RadioGroup>
 
     <android.support.design.widget.FloatingActionButton

@@ -205,7 +205,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void onBackPressed() {
-        if (mCurrentFragment.handleBackKey()) {
+        if (null!= mCurrentFragment && mCurrentFragment.handleBackKey()) {
             return;
         }
 

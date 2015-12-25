@@ -43,7 +43,7 @@ public class DetailActivity extends BaseActivity {
     private String[] mTabTitles;
     DetailBaseFragment mCurrentFragment;
 
-    private static final int IMAGE_LAYOUT_HEIGHT = 690;// define in the dimens/
+    private static final int IMAGE_LAYOUT_HEIGHT = 600;// define in the dimens/
     private int mLastScrollY;
     ListenableListView.OnListScrollListener mOnListScrollListener = new ListenableListView.OnListScrollListener() {
         @Override

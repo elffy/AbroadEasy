@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
+        <item android:id="@+id/nav_camara" android:icon="@mipmap/article_heart"
             android:title="Notifications" />
-        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
+        <item android:id="@+id/nav_gallery" android:icon="@mipmap/article_more"
             android:title="Favorites" />
-        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
+        <item android:id="@+id/nav_slideshow" android:icon="@mipmap/article_star"
             android:title="Last Screen" />
     </group>
 
     <item android:title="Settings">
         <menu>
-            <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
+            <item android:id="@+id/nav_manage" android:icon="@mipmap/ic_avatar"
                 android:title="Updated Password/Email" />
-            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
+            <item android:id="@+id/nav_share" android:icon="@mipmap/article_question"
                 android:title="Enable Notification" />
-            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
+            <item android:id="@+id/nav_send" android:icon="@mipmap/ic_appointment_fb"
                 android:title="Disable Animation" />
         </menu>
     </item>

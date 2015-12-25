@@ -79,6 +79,6 @@
     <string name="tab_title_intro">Intro</string>
     <string name="tab_title_detail">Detail</string>
     <string name="tab_title_price">Price</string>
-    <string name="tab_title_comment">Comment</string>
+    <string name="tab_title_comment">Faq</string>
 
 </resources>
