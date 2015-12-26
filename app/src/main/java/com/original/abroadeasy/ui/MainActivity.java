@@ -184,11 +184,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         alphaAnimation.start();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-    }
-
     @OnClick(R.id.fab)
     public void onFabClick(View v) {
         LogUtil.d("FAB clicked!!");
@@ -257,6 +252,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onDestroy() {
         ButterKnife.unbind(this);
+        HomeFragment.mFirstLoad = true;
         super.onDestroy();
     }
 

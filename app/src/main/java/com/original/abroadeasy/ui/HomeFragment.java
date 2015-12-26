@@ -2,7 +2,6 @@ package com.original.abroadeasy.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,12 +17,10 @@ import android.widget.FrameLayout;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.adapter.HomeListAdapter;
 import com.original.abroadeasy.app.App;
-import com.original.abroadeasy.model.HomeItem;
 import com.original.abroadeasy.model.ProgramItem;
 import com.original.abroadeasy.network.NetworkUtil;
 import com.original.abroadeasy.util.LogUtil;
@@ -91,12 +88,17 @@ public class HomeFragment extends BaseFragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_LOAD_DONE:
+                    long delay = 200;
+                    if (mFirstLoad) {
+                        mFirstLoad = false;
+                        delay = 300;
+                    }
                     postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             setRefreshing(false);
                         }
-                    }, 200);
+                    }, delay);
                     mLoadTask = null;
                     if (mPendLoadType > 0) {
                         mLoadTask = new LoadDataTask(mPendLoadType);
@@ -156,6 +158,7 @@ public class HomeFragment extends BaseFragment {
         mLoadTask.execute(mLoadIndex);
     }
 
+    public static boolean mFirstLoad = true;
     class LoadDataTask extends AsyncTask<Integer, Void, Void> {
 
         private int mLoadType;
@@ -166,7 +169,18 @@ public class HomeFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             if (mLoadType == LOAD_MORE) {
-                setRefreshing(true);
+                if (mFirstLoad) {
+                    // trigger SwipeRefreshLayout to show or wait onMeasure called.
+//                    mSwipeRefreshLayout.setProgressViewOffset(false, -26 * 3, 64 * 3);
+                    mSwipeRefreshLayout.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            setRefreshing(true);
+                        }
+                    }, 100);
+                } else {
+                    setRefreshing(true);
+                }
             }
         }
 
