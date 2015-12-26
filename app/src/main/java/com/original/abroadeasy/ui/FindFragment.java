@@ -52,6 +52,7 @@ public class FindFragment extends BaseFragment implements OnGridItemSelectedList
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.addItemDecoration(new GridMarginDecoration(mActivity, 2, 2, 2, 2));
         mRecyclerView.setAdapter(findGridAdapter);
+        mRecyclerView.addOnScrollListener(mRecylerViewScrollListener);
         mFindHandler = new FindHandler();
 
         return mView;

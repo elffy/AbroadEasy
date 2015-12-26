@@ -50,6 +50,9 @@ public class ScrollFABBehavior extends FloatingActionButton.Behavior {
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child,
                                View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
+        if (!child.isEnabled()) {
+            return;
+        }
         if (dyConsumed > 0 && !this.mIsAnimatingOut && child.getVisibility() == View.VISIBLE) {
             // User scrolled down and the FAB is currently visible -> hide the FAB
             animateOut(child);

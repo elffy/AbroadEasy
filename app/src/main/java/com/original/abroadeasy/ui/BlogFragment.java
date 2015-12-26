@@ -98,23 +98,8 @@ public class BlogFragment extends BaseFragment {
         mRecyclerView.setAdapter(mBlogAdapter);
 
         //if do nothing recyllerview wil refresh everywhere
-        mRecyclerView.addOnScrollListener(new OnScrollListener() {
-            private int mScrolledY = 0;
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                mScrolledY += dy;
-                if (mScrolledY > 0) {
-                    setSwipeEnable(false);
-                } else {
-                    setSwipeEnable(true);
-                }
-            }
-        });
-
+        mRecyclerView.addOnScrollListener(mRecylerViewScrollListener);
     }
-
 
     private class BlogAdapter extends RecyclerView.Adapter<MyViewHolder> {
         ArrayList<BlogItem> mData;

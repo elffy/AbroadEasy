@@ -138,20 +138,7 @@ public class HomeFragment extends BaseFragment {
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            private int mScrolledY = 0;
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                mScrolledY += dy;
-                if (mScrolledY > 0) {
-                    setSwipeEnable(false);
-                } else {
-                    setSwipeEnable(true);
-                }
-            }
-        });
+        mRecyclerView.addOnScrollListener(mRecylerViewScrollListener);
     }
 
     private static final int LOAD_MORE = 1;

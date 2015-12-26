@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.original.abroadeasy.R;
@@ -31,6 +32,21 @@ public class BaseFragment extends Fragment {
     public boolean handleBackKey() {
         return false;
     }
+
+    RecyclerView.OnScrollListener mRecylerViewScrollListener = new RecyclerView.OnScrollListener() {
+        private int mScrolledY = 0;
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            mScrolledY += dy;
+            if (mScrolledY > 0) {
+                setSwipeEnable(false);
+            } else {
+                setSwipeEnable(true);
+            }
+        }
+    };
 
     public void onRefresh() {
         // implement by child who wants handle refresh.
