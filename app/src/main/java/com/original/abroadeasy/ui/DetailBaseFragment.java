@@ -21,6 +21,11 @@ public class DetailBaseFragment extends Fragment {
         mListScrollListener = l;
     }
 
+    int mFragmentTag;
+    public void setTag(int tag) {
+        mFragmentTag = tag;
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

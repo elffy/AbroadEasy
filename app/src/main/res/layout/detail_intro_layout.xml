@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="20dp"
+        android:background="#68b9cc">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:text="Program Title"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#212121"
+            android:textSize="15sp"
+            android:text="Location"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#4a4a4a"
+        android:textSize="18sp"
+        android:text="Why It’s Unique"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="#6d6f72"
+        android:textSize="15sp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Haec para/doca illi, nos admirabilia dicamus. Omnes enim iucundum motum, quo sensus hilaretur. Ait enim se, si uratur, Quam hoc suave! ."/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:src="@mipmap/icon_detail_intro"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#4a4a4a"
+        android:textSize="18sp"
+        android:text="Program Overview"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="45dp"
+        android:textStyle="bold"
+        android:textColor="#3c3c3c"
+        android:textSize="15sp"
+        android:text="Activity"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="45dp"
+        android:textStyle="bold"
+        android:textColor="#3c3c3c"
+        android:textSize="15sp"
+        android:text="Camping and Hiking"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="45dp"
+        android:textStyle="bold"
+        android:textColor="#3c3c3c"
+        android:textSize="15sp"
+        android:text="Assignments"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="45dp"
+        android:textStyle="bold"
+        android:textColor="#3c3c3c"
+        android:textSize="15sp"
+        android:text="Study and Experiments"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="45dp"
+        android:textStyle="bold"
+        android:textColor="#3c3c3c"
+        android:textSize="15sp"
+        android:text="Free Time"/>
+</LinearLayout>

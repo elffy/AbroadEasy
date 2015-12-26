@@ -43,6 +43,11 @@ public class DetailActivity extends BaseActivity {
     private String[] mTabTitles;
     DetailBaseFragment mCurrentFragment;
 
+    public static final int FRAGMENT_TAG_INTRO = 0;
+    public static final int FRAGMENT_TAG_DETAIL = 1;
+    public static final int FRAGMENT_TAG_PRICE = 2;
+    public static final int FRAGMENT_TAG_FAQ = 3;
+
     private static final int IMAGE_LAYOUT_HEIGHT = 600;// define in the dimens/
     private int mLastScrollY;
     ListenableListView.OnListScrollListener mOnListScrollListener = new ListenableListView.OnListScrollListener() {
@@ -95,14 +100,17 @@ public class DetailActivity extends BaseActivity {
             }
         });
 
-        DetailBaseFragment fragmentMain1 = new DetailFragmentMain();
-        DetailBaseFragment fragmentMain2 = new DetailFragmentMain();
+        DetailBaseFragment fragmentMain1 = new DetailFragmentIntro();
+        DetailBaseFragment fragment2 = new DetailFragmentSimple();
+        fragment2.setTag(FRAGMENT_TAG_DETAIL);
         DetailBaseFragment fragment3 = new DetailFragmentSimple();
+        fragment3.setTag(FRAGMENT_TAG_PRICE);
         DetailBaseFragment fragment4 = new DetailFragmentSimple();
+        fragment4.setTag(FRAGMENT_TAG_FAQ);
         mCurrentFragment = fragmentMain1;
         mCurrentFragment.setListScrollListener(mOnListScrollListener);
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager(),
-                fragmentMain1, fragmentMain2, fragment3, fragment4);
+                fragmentMain1, fragment2, fragment3, fragment4);
         mViewPager.setAdapter(mPagerAdapter);
 
         mViewPagerTabs.setViewPager(mViewPager);

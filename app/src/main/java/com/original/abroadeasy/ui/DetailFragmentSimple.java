@@ -2,20 +2,16 @@ package com.original.abroadeasy.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AbsListView;
 import android.widget.TextView;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.adapter.DetailFragmentAdapter;
 import com.original.abroadeasy.app.App;
-import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.widget.ListenableListView;
 
 import butterknife.ButterKnife;
@@ -26,6 +22,7 @@ import butterknife.ButterKnife;
 public class DetailFragmentSimple extends DetailBaseFragment {
 
     private View mView;
+    private View mContentView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -39,12 +36,24 @@ public class DetailFragmentSimple extends DetailBaseFragment {
         ButterKnife.bind(this, mView);
         mListView = (ListenableListView) mView.findViewById(R.id.list);
         DetailFragmentAdapter adapter = new DetailFragmentAdapter(mActivity);
-        TextView textView = new TextView(container.getContext());
-        textView.setText("aaaaaaaaaaaaaaaaa/nbbbbbbbbbbbbbbbbbbbbbb/nccccccccccccccc");
-        textView.setLayoutParams(new AbsListView.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, App.sScreenHeight));
-        adapter.addView(textView);
-        mListView.initHeaderView();
+        if (mFragmentTag == DetailActivity.FRAGMENT_TAG_DETAIL) {
+            mContentView = inflater.inflate(R.layout.detail_detail_layout, null);
+            mContentView.setMinimumHeight(App.sScreenHeight);
+            adapter.addView(mContentView);
+        } else if (mFragmentTag == DetailActivity.FRAGMENT_TAG_PRICE) {
+            mContentView = inflater.inflate(R.layout.detail_price_layout, null);
+            mContentView.setMinimumHeight(App.sScreenHeight);
+            adapter.addView(mContentView);
+        } else {
+            TextView textView = new TextView(container.getContext());
+            textView.setAutoLinkMask(Linkify.ALL);
+            textView.setText("Do you have any questions, visit our website : http://www.abroadeasy.com");
+            textView.setPadding(48, 24, 24, 24);
+            textView.setLayoutParams(new AbsListView.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, App.sScreenHeight));
+            adapter.addView(textView);
+        }
+        mListView.initHeaderAndFooterView();
         mListView.setAdapter(adapter);
         return mView;
     }

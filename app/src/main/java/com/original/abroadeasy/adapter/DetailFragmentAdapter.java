@@ -39,6 +39,14 @@ public class DetailFragmentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        view = mViews.get(i);
+        // setOnClickListener to avoid the background state change handled by listView when press.
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //do nothing.
+            }
+        });
         return mViews.get(i);
     }
 }

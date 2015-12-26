@@ -12,7 +12,8 @@ import android.widget.ListView;
  */
 public class ListenableListView extends ListView implements AbsListView.OnScrollListener {
 
-    public static final int HEAD_VIEW_HEIGHT = 272 * 3;//272dp
+    public static final int HEAD_VIEW_HEIGHT = 243 * 3;//same as the cover layout
+    public static final int FOOTER_VIEW_HEIGHT = 48 * 3;//same as the bottom bar
 
     public interface OnListScrollListener {
         void onYScrolled(int scrollY);
@@ -34,11 +35,15 @@ public class ListenableListView extends ListView implements AbsListView.OnScroll
         setOnScrollListener(this);
     }
 
-    public void initHeaderView() {
+    public void initHeaderAndFooterView() {
         mHeadView = new View(this.getContext());
         AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, HEAD_VIEW_HEIGHT);
         mHeadView.setLayoutParams(lp);
         addHeaderView(mHeadView);
+        View footerView  = new View(this.getContext());
+        lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FOOTER_VIEW_HEIGHT);
+        footerView.setLayoutParams(lp);
+        addFooterView(footerView);
     }
 
     @Override
