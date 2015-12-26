@@ -523,4 +523,6 @@
 
     <!-- Color for icons in the actionbar -->
     <color name="actionbar_icon_color">#ffffff</color>
+
+    <color name="blog_text_button">#68B9CC</color>
 </resources>

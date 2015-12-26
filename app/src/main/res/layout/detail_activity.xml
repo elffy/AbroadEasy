@@ -54,8 +54,7 @@
             android:layout_marginTop="151dp"
             android:layout_marginLeft="6dp"
             android:text="Program title and location"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"/>
+            android:textAppearance="@style/ItemTitleTextStyle"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -7,34 +7,64 @@
     android:layout_margin="5dp"
     card_view:cardCornerRadius="5dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="26dp">
+        android:layout_height="300dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_blog_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/image_home_test" />
+
+
+            <TextView
+                android:id="@+id/tx_title_blog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="145dp"
+                android:layout_marginLeft="6dp"
+                android:textAppearance="@style/ItemTitleTextStyle"/>
+
+        </FrameLayout>
 
         <TextView
-            android:id="@+id/title_blog"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:layout_marginTop="4dp"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/description_blog"
-            android:layout_width="165dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
-            android:textSize="16sp"
-            android:layout_below="@+id/title_blog"/>
-
-        <ImageView
-            android:id="@+id/item_image_blog"
-            android:layout_toRightOf="@+id/title_blog"
+            android:id="@+id/tx_descrip_blog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"/>
-    </RelativeLayout>
+            android:paddingTop="20dp"
+            android:layout_marginLeft="26dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:id="@+id/tx_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="28dp"
+                android:text="SHARE"
+                android:textAppearance="@style/BlogItemTextButtonStyle" />
+
+            <TextView
+                android:id="@+id/tx_learn_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="LEARN MORE"
+                android:textAppearance="@style/BlogItemTextButtonStyle" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 </android.support.v7.widget.CardView>

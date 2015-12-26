@@ -131,7 +131,8 @@ public class BlogFragment extends BaseFragment {
                 } else {
                     d = mActivity.getResources().getDrawable(R.mipmap.blog_im3);
                 }
-                mData.add(new BlogItem("title " + i, "descrip " + i, d));
+                mData.add(new BlogItem("Top 10 Australian Beaches " + i, "Number" + i + "\n" +"Whitehaven Beach\n" +
+                        "Whitsunday lsland,Whitsunday lslands ", d));
             }
         }
 
@@ -160,9 +161,9 @@ public class BlogFragment extends BaseFragment {
         BlogItem mBoundItem;
         public MyViewHolder(View itemView) {
             super(itemView);
-            mTitleTv = (TextView) itemView.findViewById(R.id.title_blog);
-            mDescripTv = (TextView) itemView.findViewById(R.id.description_blog);
-            mImage = (ImageView) itemView.findViewById(R.id.item_image_blog);
+            mTitleTv = (TextView) itemView.findViewById(R.id.tx_title_blog);
+            mDescripTv = (TextView) itemView.findViewById(R.id.tx_descrip_blog);
+            mImage = (ImageView) itemView.findViewById(R.id.image_blog_item);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

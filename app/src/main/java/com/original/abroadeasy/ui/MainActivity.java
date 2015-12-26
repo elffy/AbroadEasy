@@ -231,7 +231,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     break;
                 case ID_FIND:
                     mCurrentFragment = new FindFragment();
-                    mFloatingActionBtn.setVisibility(View.VISIBLE);
+                    mFloatingActionBtn.setVisibility(View.GONE);
                     break;
                 case ID_BLOG:
                     mCurrentFragment = new BlogFragment();
