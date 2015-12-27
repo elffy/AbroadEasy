@@ -113,7 +113,7 @@
         android:layout_marginBottom="65dp"
         android:layout_marginRight="10dp"
         android:clickable="true"
-        android:src="@mipmap/ic_search"
+        android:src="@mipmap/ic_find"
         app:backgroundTint="#ef9b1d"
         app:borderWidth="0dp"
         app:elevation="6dp"

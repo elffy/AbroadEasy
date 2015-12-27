@@ -1,8 +1,10 @@
 package com.original.abroadeasy.ui;
 
+import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -223,7 +225,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     mCurrentFragment = new FindFragment();
                     mSwipRefreshLayout.setEnabled(true);
                     mFloatingActionBtn.setVisibility(View.VISIBLE);
-                    mFloatingActionBtn.setImageResource(R.mipmap.ic_search);
+                    mFloatingActionBtn.setImageResource(R.mipmap.ic_ab_search);
                     mFloatingActionBtn.setEnabled(true);
                     break;
                 case ID_BLOG:
