@@ -1,10 +1,7 @@
 package com.original.abroadeasy.ui;
 
-import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -23,7 +20,6 @@ import android.widget.RadioGroup;
 
 import com.kf5sdk.init.KF5SDKConfig;
 import com.original.abroadeasy.R;
-import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.util.PreferenceUtils;
 
 import butterknife.Bind;
@@ -39,6 +35,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final int ID_FIND = 1;
     private static final int ID_BLOG = 2;
     private static final int ID_USER = 3;
+    private int mCrrrentFragmentId = ID_HOME;
+
     private EditText mSearchView;
     private View mVoiceSearchButton;
 
@@ -188,8 +186,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @OnClick(R.id.fab)
     public void onFabClick(View v) {
-        LogUtil.d("FAB clicked!!");
-        KF5SDKConfig.INSTANCE.startFeedBackActivity(MainActivity.this);
+        if (mCrrrentFragmentId == ID_HOME) {
+            KF5SDKConfig.INSTANCE.startFeedBackActivity(MainActivity.this);
+        } else {
+            mCurrentFragment.onFabClicked();
+        }
     }
 
     @Override
@@ -212,6 +213,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void switchToFragment(int id) {
         mCurrentFragment = (BaseFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAGS[id]);
         mSwipRefreshLayout.setRefreshing(false);
+        mCrrrentFragmentId = id;
         if (mCurrentFragment == null) {
             switch (id) {
                 case ID_HOME:
@@ -222,7 +224,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     mFloatingActionBtn.setEnabled(true);
                     break;
                 case ID_FIND:
-                    mCurrentFragment = new FindFragment();
+                    mCurrentFragment = new ExploreFragment();
                     mSwipRefreshLayout.setEnabled(true);
                     mFloatingActionBtn.setVisibility(View.VISIBLE);
                     mFloatingActionBtn.setImageResource(R.mipmap.ic_ab_search);

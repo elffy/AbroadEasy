@@ -13,5 +13,30 @@
         <item>@mipmap/blog_im2</item>
         <item>@mipmap/blog_im3</item>
     </array>
-
+    <string-array name="program_locations">
+        <item>North America</item>
+        <item>Canada</item>
+        <item>Japan</item>
+        <item>France</item>
+        <item>UK</item>
+        <item>German</item>
+        <item>Switzerland</item>
+    </string-array>
+    <string-array name="program_category">
+        <item>Camps</item>
+        <item>Study</item>
+        <item>Work</item>
+    </string-array>
+    <string-array name="program_length">
+        <item>2 Weeks</item>
+        <item>4 Weeks</item>
+        <item>6 Weeks</item>
+    </string-array>
+    <string-array name="program_price">
+        <item>$2000</item>
+        <item>$4000</item>
+        <item>$6000</item>
+        <item>$8000</item>
+        <item>$10000</item>
+    </string-array>
 </resources>

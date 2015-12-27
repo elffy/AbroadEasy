@@ -81,4 +81,14 @@
     <string name="tab_title_price">Price</string>
     <string name="tab_title_comment">Faq</string>
 
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
+    <string name="program_category">Category</string>
+    <string name="program_location">Location</string>
+    <string name="program_for_who">For Who</string>
+    <string name="program_custom_date">Customize Date</string>
+    <string name="program_price">Price</string>
+    <string name="program_length">Length of Program</string>
+    <string name="filter_reset">Reset All</string>
+    <string name="show_result">Show Result</string>
 </resources>

@@ -48,6 +48,10 @@ public class BaseFragment extends Fragment {
         }
     };
 
+    public void onFabClicked() {
+
+    }
+
     public void onRefresh() {
         // implement by child who wants handle refresh.
     }

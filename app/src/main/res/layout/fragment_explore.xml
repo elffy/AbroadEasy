@@ -10,4 +10,11 @@
         android:layout_height="match_parent"
         android:paddingLeft="2.5dp"
         android:paddingRight="2.5dp" />
+
+    <ViewStub
+        android:id="@+id/search_view_stub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/search_open_layout"/>
+
 </RelativeLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto" >
+
+    <com.original.abroadeasy.widget.TwoRowLayout
+        android:id="@+id/program_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:content="@string/program_category"
+        custom:subContent="Camps" />
+
+    <com.original.abroadeasy.widget.TwoRowLayout
+        android:id="@+id/program_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:content="@string/program_location"
+        custom:subContent="North America" />
+
+    <com.original.abroadeasy.widget.TwoRowLayout
+        android:id="@+id/program_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:content="@string/program_custom_date"
+        custom:subContent="2016/1/1" />
+
+    <com.original.abroadeasy.widget.TwoRowLayout
+        android:id="@+id/program_length"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:content="@string/program_length"
+        custom:subContent="4 weeks" />
+
+    <com.original.abroadeasy.widget.TwoRowLayout
+        android:id="@+id/program_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:content="@string/program_price"
+        custom:subContent="$2000" />
+
+</merge>
