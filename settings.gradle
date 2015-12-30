@@ -1,1 +1,1 @@
-include ':app', ':KF5SDKLibrary'
+include ':app', ':KF5SDKLibrary', ':PG_Edit_SDK'

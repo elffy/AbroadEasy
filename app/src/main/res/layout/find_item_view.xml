@@ -29,8 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="145dp"
+                android:layout_marginTop="140dp"
                 android:text="Name"
                 android:textAppearance="@style/ItemTitleTextStyle" />
 

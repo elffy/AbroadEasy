@@ -63,4 +63,7 @@
     <dimen name="title_text_size">20sp</dimen>
 
     <dimen name="search_button_padding_left">25dp</dimen>
+    <dimen name="home_radio_button_height">48dp</dimen>
+    <dimen name="home_radio_button_width">48dp</dimen>
+
 </resources>

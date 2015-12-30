@@ -38,7 +38,7 @@
     <RadioGroup
         android:id="@+id/tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="43dp"
         android:background="@android:color/black"
         android:layout_gravity="bottom"
         android:gravity="center"
@@ -50,7 +50,6 @@
             style="@style/navigation_bottom_radio"
             android:drawableTop="@drawable/button_home_selector"
             android:text="@string/home" />
-
         <RadioButton
             android:id="@+id/tab_find"
             android:drawableTop="@drawable/button_explore_selector"
