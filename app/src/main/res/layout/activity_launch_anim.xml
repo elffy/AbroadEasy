@@ -7,6 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
     tools:context="com.original.abroadeasy.ui.LaunchAnimActivity">
 
     <ImageView
@@ -24,7 +26,7 @@
         android:layout_below="@+id/ic_launch_title"
         android:paddingTop="40dp"
         android:layout_centerHorizontal="true"
-        android:text="Welcome to aE"
+        android:text="Welcome to UTT"
         android:textSize="38sp"
         android:textStyle="bold"
         android:textColor="@color/grey_500"/>
