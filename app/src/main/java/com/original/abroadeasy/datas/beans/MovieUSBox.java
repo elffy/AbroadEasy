@@ -1,6 +1,7 @@
 package com.original.abroadeasy.datas.beans;
 
-import com.dxjia.doubantop.datas.beans.entities.SubjectsEntity;
+
+import com.original.abroadeasy.datas.beans.entities.SubjectsEntity;
 
 import java.util.List;
 
