@@ -109,9 +109,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     case R.id.tab_blog:
                         switchToFragment(ID_BLOG);
                         break;
-                    case R.id.tab_user_info:
+                    /*case R.id.tab_user_info:
                         switchToFragment(ID_USER);
-                        break;
+                        break;*/
                 }
             }
         });

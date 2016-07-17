@@ -21,7 +21,12 @@ import android.widget.LinearLayout;
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.adapter.HomeListAdapter;
 import com.original.abroadeasy.app.App;
+import com.original.abroadeasy.datas.beans.MovieInfoBean;
+import com.original.abroadeasy.datas.beans.MovieUSBox;
+import com.original.abroadeasy.datas.beans.entities.SubjectEntity;
+import com.original.abroadeasy.datas.beans.entities.SubjectsEntity;
 import com.original.abroadeasy.model.ProgramItem;
+import com.original.abroadeasy.network.DoubanApiUtils;
 import com.original.abroadeasy.network.NetworkUtil;
 import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.widget.BannerGallery;
@@ -115,7 +120,7 @@ public class HomeFragment extends BaseFragment {
 
     private LinearLayoutManager mLinearLayoutManager;
     private HomeListAdapter mAdapter;
-    private List<ProgramItem> mDatas = new ArrayList<ProgramItem>();
+    //private List<ProgramItem> mDatas = new ArrayList<ProgramItem>();
 
     private void intiView() {
 
@@ -125,7 +130,7 @@ public class HomeFragment extends BaseFragment {
         // init recyclerView.
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new HomeListAdapter(this, mActivity.getLayoutInflater(), mDatas);
+        mAdapter = new HomeListAdapter(this, mActivity.getLayoutInflater(), mNewPrograms);
         mAdapter.setOnItemClickListener(new HomeListAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(View view, int postion) {
@@ -146,7 +151,8 @@ public class HomeFragment extends BaseFragment {
     private static final int LOAD_MORE = 1;
     private static final int LOAD_NEW= 2;
     private int mPendLoadType = 0;
-    private List<ProgramItem> mNewPrograms;
+    //private List<ProgramItem> mNewPrograms;
+    private List<MovieInfoBean> mNewPrograms = new ArrayList<MovieInfoBean>();
     private int mLoadIndex = 0;
     private LoadDataTask mLoadTask;
     private void initData() {
@@ -191,7 +197,9 @@ public class HomeFragment extends BaseFragment {
                 index = params[0];
             }
             try {
-                mNewPrograms = App.getRetrofitService().getProgramList(index);
+                //mNewPrograms = App.getRetrofitService().getProgramList(index);
+                MovieUSBox object = DoubanApiUtils.getMovieApiService().getMoviceUSBox(DoubanApiUtils.API_KEY);
+                collectResultsFromResponse(object);
             } catch (Exception e) {
                 LogUtil.e("doInBackground, Exception:" + e.toString());
             }
@@ -200,7 +208,7 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         protected void onPostExecute(Void o) {
-            if (mNewPrograms != null && mNewPrograms.size() > 0) {
+            /*if (mNewPrograms != null && mNewPrograms.size() > 0) {
                 if (mLoadType == LOAD_NEW && mDatas.size() > 0) {
                     int oldFirstId = mDatas.get(0).id;
                     for (ProgramItem item : mNewPrograms) {
@@ -217,8 +225,45 @@ public class HomeFragment extends BaseFragment {
                 mNewPrograms.clear();
                 mAdapter.notifyDataSetChanged();
             }
+            mHandler.sendEmptyMessage(MSG_LOAD_DONE);*/
+
+            //mNewPrograms.clear();
+            mAdapter.notifyDataSetChanged();
             mHandler.sendEmptyMessage(MSG_LOAD_DONE);
         }
+    }
+
+    public void collectResultsFromResponse(Object object) {
+        if (object == null) {
+            return;
+        }
+
+        List<SubjectsEntity> subjects;
+        SubjectsEntity subjectsEntity;
+        SubjectEntity subject;
+
+        int i;
+
+        MovieUSBox usBox = (MovieUSBox)object;
+        subjects = usBox.getSubjects();
+        if (subjects != null) {
+            for (i = 0; i < subjects.size(); i++) {
+                subjectsEntity = subjects.get(i);
+                if (subjectsEntity == null) {
+                    continue;
+                }
+                subject = subjectsEntity.getSubject();
+                if (subject == null) {
+                    continue;
+                }
+
+                LogUtil.d(subject.getTitle());
+
+                mNewPrograms.add(new MovieInfoBean(subject));
+            }
+        }
+
+
     }
 
     private void loadMore() {

@@ -65,10 +65,10 @@
             style="@style/navigation_bottom_radio"
             android:text="@string/blog" />
 
-        <RadioButton
+        <!--<RadioButton
             android:id="@+id/tab_user_info"
             style="@style/navigation_bottom_radio"
             android:drawableTop="@drawable/button_my_selector"
-            android:text="@string/profile" />
+            android:text="@string/profile" />-->
     </RadioGroup>
 </android.support.design.widget.CoordinatorLayout>

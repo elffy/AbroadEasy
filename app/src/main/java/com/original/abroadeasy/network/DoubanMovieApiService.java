@@ -1,6 +1,7 @@
 package com.original.abroadeasy.network;
 
 
+import com.original.abroadeasy.datas.beans.MovieInfoBean;
 import com.original.abroadeasy.datas.beans.MovieTops;
 import com.original.abroadeasy.datas.beans.MovieUSBox;
 import com.original.abroadeasy.datas.beans.entities.CelebrityEntity;
@@ -25,6 +26,9 @@ public interface DoubanMovieApiService {
     @GET("/movie/us_box")
     public void getMoviceUSBox(@Query("apikey") String apikey,
                                Callback<MovieUSBox> callback);
+
+    @GET("/movie/us_box")
+    public MovieUSBox getMoviceUSBox(@Query("apikey") String apikey);
 
     /**
      * 异步获取TOP250
