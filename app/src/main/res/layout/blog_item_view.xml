@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="270dp"
         android:orientation="vertical">
 
         <FrameLayout
@@ -20,14 +20,15 @@
                 android:id="@+id/image_blog_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/image_home_test" />
+                android:src="@mipmap/image_home_test"
+                android:scaleType="centerCrop"/>
 
 
             <TextView
                 android:id="@+id/tx_title_blog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="145dp"
+                android:layout_marginTop="160dp"
                 android:layout_marginLeft="6dp"
                 android:textAppearance="@style/ItemTitleTextStyle"/>
 
@@ -37,13 +38,13 @@
             android:id="@+id/tx_descrip_blog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:layout_marginLeft="26dp"/>
+            android:paddingTop="10dp"
+            android:layout_marginLeft="26dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp">
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/tx_share"

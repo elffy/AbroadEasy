@@ -13,4 +13,101 @@
     <string name="login_password">密码:</string>
     <string name="setting_clear_cache">清除缓存</string>
     <string name="setting_log_out">退出登录</string>
+
+    <string name="scanning_list_name">名称：</string>
+    <string name="scanning_list_address">地址：</string>
+
+    <string name="restore_default">"还原默认设置"</string>
+
+    <string name="open_gps">"请打开GPS"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">通用</string>
+    <string name="activation">激活</string>
+    <string name="add_avatar">请点击添加头像照片</string>
+    <string name="avatar_im">头像</string>
+    <string name="avatar_name">名称</string>
+    <string name="bind">绑定</string>
+    <string name="save">保存</string>
+    <string name="save_successful">保存成功</string>
+    <string name="pref_title_social_recommendations">自动连接</string>
+    <string name="pref_description_social_recommendations">打开此选项，设备靠近时会自动连接
+    </string>
+
+    <string name="pref_title_display_name">设备地址</string>
+    <string name="upgrade_version">版本升级</string>
+    <string name="defaultt_version_description">请点击确定升级到最新的版本</string>
+    <string name="upgrade_info_get_error">获取服务器更新信息失败</string>
+    <string name="download_apk_failed">下载新版本失败</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">手动添加设备</string>
+    <string name="pref_title_add_friends_to_messages_detail">主页面会显示设备列表，点击添加</string>
+
+
+    <string name="active_search">请激活手环 搜索设备中.......</string>
+
+    <string name="pref_title_type">类型</string>
+    <string name="pref_title_longtitude">经度</string>
+    <string name="pref_title_latitude">纬度</string>
+    <string name="pref_title_radius">半径</string>
+    <string name="pref_title_countrycode">国家码</string>
+    <string name="pref_title_country">国家</string>
+    <string name="pref_title_citycode">城市码</string>
+    <string name="pref_title_city">城市</string>
+
+    <string name="pref_title_district">城市码</string>
+    <string name="pref_title_street">城市</string>
+    <string name="pref_title_address">城市</string>
+    <string name="pref_title_description">描述</string>
+    <string name="confirm">确定</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">数据 &amp; 同步</string>
+
+    <string name="pref_title_sync_frequency">消息同步频率</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 second</item>
+        <item>20 second</item>
+        <item>1 min</item>
+        <item>3 min</item>
+        <item>6 min</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>20</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">系统同步设定</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">通知</string>
+
+    <string name="pref_title_new_message_notifications">新消息通知</string>
+
+    <string name="pref_title_ringtone">铃声</string>
+    <string name="pref_ringtone_silent">静音</string>
+
+    <string name="pref_title_vibrate">震动</string>
+    <string name="title_activity_device_manager">DeviceManagerActivity</string>
 </resources>

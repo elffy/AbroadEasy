@@ -3,21 +3,21 @@
 
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_camara" android:icon="@mipmap/article_heart"
-            android:title="Notifications" />
+            android:title="通知" />
         <item android:id="@+id/nav_gallery" android:icon="@mipmap/article_more"
-            android:title="Favorites" />
+            android:title="收藏" />
         <item android:id="@+id/nav_slideshow" android:icon="@mipmap/article_star"
-            android:title="Last Screen" />
+            android:title="设置" />
     </group>
 
     <item android:title="Settings">
         <menu>
             <item android:id="@+id/nav_manage" android:icon="@mipmap/ic_avatar"
-                android:title="Updated Password/Email" />
+                android:title="更新密码" />
             <item android:id="@+id/nav_share" android:icon="@mipmap/article_question"
-                android:title="Enable Notification" />
+                android:title="启用通知" />
             <item android:id="@+id/nav_send" android:icon="@mipmap/ic_appointment_fb"
-                android:title="Disable Animation" />
+                android:title="关闭动画" />
         </menu>
     </item>
 

@@ -25,9 +25,6 @@
         android:layout_marginRight="10dp"
         android:clickable="true"
         android:src="@mipmap/add"
-
-
-
         app:backgroundTint="#ef9b1d"
         app:borderWidth="0dp"
         app:elevation="6dp"

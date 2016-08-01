@@ -3,9 +3,15 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
     </style>
     <!-- Base application theme. -->
     <style name="Theme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--<item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">#ffab40</item>-->
     </style>
 
     <style name="navigation_bottom_radio">
@@ -22,24 +28,31 @@
     </style>
 
     <!-- Text style for tabs. -->
-    <style name="ActionBarTabTextStyle" >
+    <style name="ActionBarTabTextStyle">
         <item name="android:textColor">@color/tab_title_text_color</item>
         <item name="android:textSize">@dimen/tab_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="BlogItemTextButtonStyle" >
+    <style name="BlogItemTextButtonStyle">
         <item name="android:textColor">@color/blog_text_button</item>
         <item name="android:textSize">@dimen/tab_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="ItemTitleTextStyle" >
+    <style name="ItemTitleTextStyle">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

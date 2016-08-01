@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.datas.beans.MovieInfoBean;
-import com.original.abroadeasy.model.ProgramItem;
 import com.original.abroadeasy.util.LogUtil;
 
 import java.util.List;
@@ -20,25 +18,18 @@ import java.util.Random;
 /**
  * Created by zengjinlong on 15-11-29.
  */
-public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class BlogListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int ITEM_TYPE_NORMAL = 0;
-    private static final int ITME_TYPE_HEADER = 1;
+    /*private static final int ITEM_TYPE_NORMAL = 0;
+    private static final int ITME_TYPE_HEADER = 1;*/
     private Fragment mFragment;
     List<MovieInfoBean> mData;
     final LayoutInflater mLayoutInflater;
     private OnItemClickListener mItemClickListener;
     private OnScrollListener mScrollListener;
-    private RecyclerView.ViewHolder mHeaderViewHolder;
+    //private RecyclerView.ViewHolder mHeaderViewHolder;
 
     private static int[] imags = {
-            R.mipmap.test1,
-            R.mipmap.test2,
-            R.mipmap.test3,
-            R.mipmap.test4,
-            R.mipmap.test5,
-            R.mipmap.test6,
-            R.mipmap.test8,
             R.mipmap.test9,
             R.mipmap.test10,
             R.mipmap.test11,
@@ -55,7 +46,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         void onScrollToEnd();
     }
 
-    public HomeListAdapter(Fragment fragment, LayoutInflater layoutInflater, List<MovieInfoBean> datas) {
+    public BlogListAdapter(Fragment fragment, LayoutInflater layoutInflater, List<MovieInfoBean> datas) {
         mFragment = fragment;
         mData = datas;
         mLayoutInflater = layoutInflater;
@@ -68,61 +59,65 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         mScrollListener = listener;
     }
 
-    public void setmHeaderViewHolder(RecyclerView.ViewHolder holder) {
+    /*public void setmHeaderViewHolder(RecyclerView.ViewHolder holder) {
         mHeaderViewHolder = holder;
-    }
+    }*/
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
+        /*if (position == 0) {
             return ITME_TYPE_HEADER;
         } else {
             return ITEM_TYPE_NORMAL;
-        }
+        }*/
+
+        return 0;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         LogUtil.d("onCreateViewHolder:" + viewType);
-        if (viewType == ITEM_TYPE_NORMAL) {
+        /*if (viewType == ITEM_TYPE_NORMAL) {
             return new MyViewHolder(mItemClickListener,
                     mLayoutInflater.inflate(R.layout.home_item_view, parent, false));
         } else {
             return mHeaderViewHolder;
-        }
+        }*/
+
+        return new MyViewHolder(mItemClickListener,
+                mLayoutInflater.inflate(R.layout.blog_item_view, parent, false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         LogUtil.d("onBindViewHolder:" + position);
-        if (position > 0) {
+        //if (position > 0) {
             if (position  == getItemCount() - 1 && mScrollListener != null) {
                 mScrollListener.onScrollToEnd();
             }
             MyViewHolder myHolder = (MyViewHolder)holder;
-            MovieInfoBean program = mData.get(position-1);
+            MovieInfoBean program = mData.get(position);
             myHolder.bindTo(program, position);
             // TODO study about the cache strategy about Glide.
             /*Glide.with(mFragment)
                     .load(program.getImageUri())
                     .centerCrop()
                     .into(myHolder.mImage);*/
-        }
+        //}
     }
 
     @Override
     public int getItemCount() {
-        if (mHeaderViewHolder != null) {
+        /*if (mHeaderViewHolder != null) {
             return mData.size() + 1;
-        }
+        }*/
         return mData.size();
     }
 
     private static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView mTitle;
-        private TextView mLocation;
-        private TextView mTime;
+        private TextView mTitleTx;
+        private TextView mDiscripTx;
         public ImageView mImage;
         private int mPostion;
         private OnItemClickListener mOnItemClickListener;
@@ -132,19 +127,17 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         public MyViewHolder(OnItemClickListener listener, View itemView) {
             super(itemView);
             mOnItemClickListener = listener;
-            mTitle = (TextView) itemView.findViewById(R.id.title);
-            mImage = (ImageView) itemView.findViewById(R.id.item_image);
-            mLocation = (TextView) itemView.findViewById(R.id.loaction);
-            mTime = (TextView) itemView.findViewById(R.id.time);
+            mTitleTx = (TextView) itemView.findViewById(R.id.tx_title_blog);
+            mImage = (ImageView) itemView.findViewById(R.id.image_blog_item);
+            mDiscripTx = (TextView) itemView.findViewById(R.id.tx_descrip_blog);
             itemView.setOnClickListener(this);
         }
 
         public void bindTo(MovieInfoBean item, int postion) {
             mBoundItem = item;
             mPostion = postion;
-            mTitle.setText(item.getTitle());
-            mLocation.setText(item.getFormatedGenres());
-            mTime.setText(item.getAverage()/**/);
+            mTitleTx.setText(item.getTitle());
+            mDiscripTx.setText(item.getFormatedGenres());
             int img = rand.nextInt(size);
             mImage.setImageResource(imags[img]);
         }

@@ -18,6 +18,7 @@ import com.original.abroadeasy.network.RetrofitService;
 import com.original.abroadeasy.util.LiteOrmDBUtil;
 import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.util.PreferenceUtils;
+import com.original.abroadeasy.util.SharedPreferencesHelper;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.Date;
@@ -49,11 +50,23 @@ public class App extends Application {
         initRetrofitService();
         sScreenHeight = getResources().getDisplayMetrics().heightPixels;
 
+        setUpSharedPreferencesHelper(this);
+
         //Init the Mob SDK by yangli 2015.12.14
         ShareSDK.initSDK(this);
 
         // Init the KF5 SDK
         initForKF5();
+    }
+
+    /**
+     * 初始化SharedPreferences
+     *
+     * @param context 上下文
+     */
+    private void setUpSharedPreferencesHelper(Context context) {
+        SharedPreferencesHelper.getInstance().Builder(context);
+
     }
 
     private void initForKF5() {

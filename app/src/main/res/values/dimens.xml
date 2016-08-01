@@ -65,5 +65,7 @@
     <dimen name="search_button_padding_left">25dp</dimen>
     <dimen name="home_radio_button_height">48dp</dimen>
     <dimen name="home_radio_button_width">48dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 </resources>

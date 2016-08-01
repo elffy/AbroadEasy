@@ -26,8 +26,8 @@
         android:layout_below="@+id/ic_launch_title"
         android:paddingTop="40dp"
         android:layout_centerHorizontal="true"
-        android:text="Welcome to UTT"
-        android:textSize="38sp"
+        android:text="欢迎山寨的豆瓣电影"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@color/grey_500"/>
 

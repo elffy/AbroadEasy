@@ -1,6 +1,8 @@
 package com.original.abroadeasy.ui;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,8 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.original.abroadeasy.R;
+import com.original.abroadeasy.adapter.BlogListAdapter;
+import com.original.abroadeasy.datas.beans.MovieInfoBean;
+import com.original.abroadeasy.datas.beans.MovieUSBox;
+import com.original.abroadeasy.datas.beans.entities.SubjectEntity;
+import com.original.abroadeasy.datas.beans.entities.SubjectsEntity;
+import com.original.abroadeasy.network.DoubanApiUtils;
+import com.original.abroadeasy.network.NetworkUtil;
+import com.original.abroadeasy.util.LogUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,8 +49,21 @@ public class BlogFragment extends BaseFragment {
 
     }
 
+    private List<MovieInfoBean> mNewPrograms = new ArrayList<MovieInfoBean>();
 
+    private static final int LOAD_MORE = 1;
+    private static final int LOAD_NEW= 2;
+    private int mLoadIndex = 0;
 
+    private LoadDataTask mLoadTask;
+    private void initData() {
+        if (!NetworkUtil.isNetworkAvailable(mActivity)) {
+            // TODO add Toast
+            return;// network unavailable, just return;
+        }
+        mLoadTask = new LoadDataTask(LOAD_MORE);
+        mLoadTask.execute(mLoadIndex);
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_blog, container, false);
@@ -47,6 +71,12 @@ public class BlogFragment extends BaseFragment {
         initView();
         mBlogHandler = new BlogHandler();
         return mView;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initData();
     }
 
     @Override
@@ -89,19 +119,26 @@ public class BlogFragment extends BaseFragment {
     }
 
     private LinearLayoutManager mLinearLayoutManager;
-    private BlogAdapter mBlogAdapter;
+    private BlogListAdapter mBlogAdapter;
     private void initView() {
 
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mBlogAdapter = new BlogAdapter(mActivity.getLayoutInflater());
+        mBlogAdapter = new BlogListAdapter(this, mActivity.getLayoutInflater(), mNewPrograms);
         mRecyclerView.setAdapter(mBlogAdapter);
+        mBlogAdapter.setOnItemClickListener(new BlogListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int postion) {
+                Intent intent = new Intent(mActivity, BlogDetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //if do nothing recyllerview wil refresh everywhere
         mRecyclerView.addOnScrollListener(mRecylerViewScrollListener);
     }
 
-    private class BlogAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    /*private class BlogAdapter extends RecyclerView.Adapter<MyViewHolder> {
         ArrayList<BlogItem> mData;
         final LayoutInflater mLayoutInflater;
         public BlogAdapter(LayoutInflater layoutInflater) {
@@ -178,5 +215,107 @@ public class BlogFragment extends BaseFragment {
             mDescrip = descrip;
             mPicture = d;
         }
+    }*/
+
+    public static boolean mFirstLoad = true;
+    class LoadDataTask extends AsyncTask<Integer, Void, Void> {
+
+        private int mLoadType;
+        LoadDataTask(int type) {
+            mLoadType = type;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            //if (mLoadType == LOAD_MORE) {
+                if (mFirstLoad) {
+                    // trigger SwipeRefreshLayout to show or wait onMeasure called.
+//                    mSwipeRefreshLayout.setProgressViewOffset(false, -26 * 3, 64 * 3);
+                    mSwipeRefreshLayout.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            setRefreshing(true);
+                        }
+                    }, 100);
+                } else {
+                    setRefreshing(true);
+                }
+            //}
+        }
+
+        @Override
+        protected Void doInBackground(Integer[] params) {
+            int index = 0;
+            if (params != null && params.length > 0) {
+                index = params[0];
+            }
+            try {
+                //mNewPrograms = App.getRetrofitService().getProgramList(index);
+                MovieUSBox object = DoubanApiUtils.getMovieApiService().getMoviceUSBox(DoubanApiUtils.API_KEY);
+                collectResultsFromResponse(object);
+            } catch (Exception e) {
+                LogUtil.e("doInBackground, Exception:" + e.toString());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void o) {
+            /*if (mNewPrograms != null && mNewPrograms.size() > 0) {
+                if (mLoadType == LOAD_NEW && mDatas.size() > 0) {
+                    int oldFirstId = mDatas.get(0).id;
+                    for (ProgramItem item : mNewPrograms) {
+                        if (item.id < oldFirstId) {
+                            // add new items at head
+                            mDatas.add(0, item);
+                            mLoadIndex++;
+                        }
+                    }
+                } else {
+                    mLoadIndex += mNewPrograms.size();
+                    mDatas.addAll(mNewPrograms);
+                }
+                mNewPrograms.clear();
+                mAdapter.notifyDataSetChanged();
+            }
+            mHandler.sendEmptyMessage(MSG_LOAD_DONE);*/
+
+            //mNewPrograms.clear();
+            mBlogAdapter.notifyDataSetChanged();
+            //mHandler.sendEmptyMessage(MSG_LOAD_DONE);
+        }
+    }
+
+    public void collectResultsFromResponse(Object object) {
+        if (object == null) {
+            return;
+        }
+
+        List<SubjectsEntity> subjects;
+        SubjectsEntity subjectsEntity;
+        SubjectEntity subject;
+
+        int i;
+
+        MovieUSBox usBox = (MovieUSBox)object;
+        subjects = usBox.getSubjects();
+        if (subjects != null) {
+            for (i = 0; i < subjects.size(); i++) {
+                subjectsEntity = subjects.get(i);
+                if (subjectsEntity == null) {
+                    continue;
+                }
+                subject = subjectsEntity.getSubject();
+                if (subject == null) {
+                    continue;
+                }
+
+                LogUtil.d(subject.getTitle());
+
+                mNewPrograms.add(new MovieInfoBean(subject));
+            }
+        }
+
+
     }
 }
