@@ -6,7 +6,6 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.original.abroadeasy.ui.MainActivity;
 import com.original.abroadeasy.util.AnimUtils;
 
 /**

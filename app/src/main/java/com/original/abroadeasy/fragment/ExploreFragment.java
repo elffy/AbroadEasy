@@ -1,5 +1,6 @@
-package com.original.abroadeasy.ui;
+package com.original.abroadeasy.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 
 import com.original.abroadeasy.Listeners.OnGridItemSelectedListener;
 import com.original.abroadeasy.R;
+import com.original.abroadeasy.activity.AnswerListActivity;
 import com.original.abroadeasy.adapter.FindGridAdapter;
+import com.original.abroadeasy.activity.MainActivity;
 import com.original.abroadeasy.widget.CustomSearchBar;
 import com.original.abroadeasy.widget.GridMarginDecoration;
 import com.original.abroadeasy.widget.TwoRowLayout;
@@ -149,6 +152,8 @@ public class ExploreFragment extends BaseFragment implements OnGridItemSelectedL
     @Override
     public void onGridItemClick(View view, int pos) {
         Toast.makeText(mActivity, "Grid item clicked is :" + pos, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(mActivity, AnswerListActivity.class);
+        startActivity(intent);
     }
 
     private class FindHandler extends Handler {

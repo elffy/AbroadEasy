@@ -1,4 +1,4 @@
-package com.original.abroadeasy.ui;
+package com.original.abroadeasy.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

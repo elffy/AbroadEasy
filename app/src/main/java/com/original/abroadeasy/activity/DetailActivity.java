@@ -1,4 +1,4 @@
-package com.original.abroadeasy.ui;
+package com.original.abroadeasy.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.original.abroadeasy.R;
+import com.original.abroadeasy.fragment.DetailBaseFragment;
+import com.original.abroadeasy.fragment.DetailFragmentIntro;
+import com.original.abroadeasy.fragment.DetailFragmentSimple;
 import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.widget.ViewPagerTabs;
 import com.original.abroadeasy.widget.ListenableListView;

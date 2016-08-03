@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.kf5sdk.init.UserInfo;
-import com.original.abroadeasy.ui.UserInfoFragment;
 import com.original.abroadeasy.util.PreferenceUtils;
 
 /**

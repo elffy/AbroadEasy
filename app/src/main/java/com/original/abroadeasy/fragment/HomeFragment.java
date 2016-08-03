@@ -1,4 +1,4 @@
-package com.original.abroadeasy.ui;
+package com.original.abroadeasy.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,14 +20,13 @@ import android.widget.LinearLayout;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.adapter.HomeListAdapter;
-import com.original.abroadeasy.app.App;
 import com.original.abroadeasy.datas.beans.MovieInfoBean;
 import com.original.abroadeasy.datas.beans.MovieUSBox;
 import com.original.abroadeasy.datas.beans.entities.SubjectEntity;
 import com.original.abroadeasy.datas.beans.entities.SubjectsEntity;
-import com.original.abroadeasy.model.ProgramItem;
 import com.original.abroadeasy.network.DoubanApiUtils;
 import com.original.abroadeasy.network.NetworkUtil;
+import com.original.abroadeasy.activity.DetailActivity;
 import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.widget.BannerGallery;
 

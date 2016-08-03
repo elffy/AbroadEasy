@@ -1,35 +1,27 @@
-package com.original.abroadeasy.ui;
+package com.original.abroadeasy.activity;
 
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
-import android.provider.Settings;
 import android.support.v7.app.ActionBar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 
 import com.original.abroadeasy.R;
-import com.original.abroadeasy.app.App;
-import com.original.abroadeasy.ui.AppCompatPreferenceActivity;
-import com.original.abroadeasy.ui.MainActivity;
 import com.original.abroadeasy.upgrade.UpdateInfo;
 import com.original.abroadeasy.upgrade.UpdateUtil;
 import com.original.abroadeasy.util.ConstDefine;

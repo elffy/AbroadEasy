@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.LaunchAnimActivity"
+            android:name=".activity.LaunchAnimActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.NoActionBar">
@@ -36,16 +36,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.NoActionBar"></activity>
         <activity
-            android:name=".ui.DetailActivity"
+            android:name=".activity.DetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.NoActionBar" />
         <activity
-            android:name=".ui.SettingActivity"
+            android:name=".activity.SettingActivity"
             android:label="@string/action_settings"
             android:screenOrientation="portrait" />
 
@@ -103,7 +104,12 @@
             android:hardwareAccelerated="true" />
         <!-- Add these for KF5 SDK :end -->
         <activity
-            android:name=".ui.BlogDetailActivity"
+            android:name=".activity.BlogDetailActivity"
+            android:label="@string/title_activity_blog_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".activity.AnswerListActivity"
             android:label="@string/title_activity_blog_detail"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

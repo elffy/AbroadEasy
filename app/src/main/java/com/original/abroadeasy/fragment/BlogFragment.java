@@ -1,19 +1,16 @@
-package com.original.abroadeasy.ui;
+package com.original.abroadeasy.fragment;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.adapter.BlogListAdapter;
@@ -23,6 +20,7 @@ import com.original.abroadeasy.datas.beans.entities.SubjectEntity;
 import com.original.abroadeasy.datas.beans.entities.SubjectsEntity;
 import com.original.abroadeasy.network.DoubanApiUtils;
 import com.original.abroadeasy.network.NetworkUtil;
+import com.original.abroadeasy.activity.BlogDetailActivity;
 import com.original.abroadeasy.util.LogUtil;
 
 import java.util.ArrayList;

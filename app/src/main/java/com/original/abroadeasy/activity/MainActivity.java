@@ -1,4 +1,4 @@
-package com.original.abroadeasy.ui;
+package com.original.abroadeasy.activity;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -21,6 +21,11 @@ import android.widget.RadioGroup;
 
 import com.kf5sdk.init.KF5SDKConfig;
 import com.original.abroadeasy.R;
+import com.original.abroadeasy.fragment.BaseFragment;
+import com.original.abroadeasy.fragment.BlogFragment;
+import com.original.abroadeasy.fragment.ExploreFragment;
+import com.original.abroadeasy.fragment.HomeFragment;
+import com.original.abroadeasy.fragment.UserInfoFragment;
 import com.original.abroadeasy.util.PreferenceUtils;
 
 import butterknife.Bind;
@@ -51,7 +56,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     SwipeRefreshLayout mSwipRefreshLayout;
 
     @Bind(R.id.fab)
-    android.support.design.widget.FloatingActionButton mFloatingActionBtn;
+    public android.support.design.widget.FloatingActionButton mFloatingActionBtn;
 
     /**
      * Open the search UI when the user clicks on the search box.

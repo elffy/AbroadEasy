@@ -1,4 +1,4 @@
-package com.original.abroadeasy.ui;
+package com.original.abroadeasy.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;

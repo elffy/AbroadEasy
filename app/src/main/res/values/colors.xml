@@ -527,4 +527,12 @@
 
     <color name="colorPrimary">#ef9b1d</color>
     <color name="colorAccent">#f39c12</color>
+
+    <color name="colorPrimaryLight">#BBDEFB</color>
+    <color name="colorPrimaryTextIcon">#212121</color>
+    <!--<color name="colorAccent">#009688</color>-->
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#727272</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="white">#ffffff</color>
 </resources>

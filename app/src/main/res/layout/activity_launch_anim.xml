@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
-    tools:context="com.original.abroadeasy.ui.LaunchAnimActivity">
+    tools:context="com.original.abroadeasy.activity.LaunchAnimActivity">
 
     <ImageView
         android:id="@+id/ic_launch_title"
