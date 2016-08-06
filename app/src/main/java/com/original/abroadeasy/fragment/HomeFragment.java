@@ -2,6 +2,7 @@ package com.original.abroadeasy.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +21,9 @@ import android.widget.LinearLayout;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.adapter.HomeListAdapter;
+import com.original.abroadeasy.datas.beans.BeansUtils;
 import com.original.abroadeasy.datas.beans.MovieInfoBean;
+import com.original.abroadeasy.datas.beans.MovieMajorInfos;
 import com.original.abroadeasy.datas.beans.MovieUSBox;
 import com.original.abroadeasy.datas.beans.entities.SubjectEntity;
 import com.original.abroadeasy.datas.beans.entities.SubjectsEntity;
@@ -133,7 +136,12 @@ public class HomeFragment extends BaseFragment {
         mAdapter.setOnItemClickListener(new HomeListAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(View view, int postion) {
-                startDetailActivity();
+                MovieMajorInfos movieMajorInfos = new MovieMajorInfos();
+                MovieInfoBean mBean = mNewPrograms.get(postion);
+                movieMajorInfos.fillDatas(mBean.getId(), mBean.getTitle(), mBean.getImageUri(),
+                        mBean.getCastsCount(), mBean.getCastsIds(), mBean.getCastsAvatorUris(),
+                        mBean.getDirectorId(), mBean.getDirectorImageUri(), mBean.getAverage());
+                startDetailActivity(movieMajorInfos);
             }
         });
         mAdapter.setmHeaderViewHolder(mHeaderViewHolder);
@@ -283,8 +291,9 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    private void startDetailActivity() {
+    private void startDetailActivity(MovieMajorInfos movieInfos) {
         Intent intent = new Intent(mActivity, DetailActivity.class);
+        intent.putExtra(BeansUtils.MOVIE_MAJOR_INFOS_KEY, movieInfos);
         startActivity(intent);
     }
 
@@ -308,7 +317,8 @@ public class HomeFragment extends BaseFragment {
         mBannerGallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startDetailActivity();
+                //这里用于链接到网页
+                startGitHubWeb();
             }
         });
         mBannerGallery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -387,5 +397,11 @@ public class HomeFragment extends BaseFragment {
             ((ImageView) convertView).setImageResource(mImages[pos]);
             return convertView;
         }
+    }
+
+    private void startGitHubWeb() {
+        Uri uri = Uri.parse("https://github.com/dxjia/DoubanTop");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 }
