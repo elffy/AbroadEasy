@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.original.abroadeasy.R;
-import com.original.abroadeasy.datas.beans.MovieInfoBean;
+import com.original.abroadeasy.model.HomeItem;
 import com.original.abroadeasy.model.ProgramItem;
 import com.original.abroadeasy.util.LogUtil;
 
@@ -25,7 +25,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int ITEM_TYPE_NORMAL = 0;
     private static final int ITME_TYPE_HEADER = 1;
     private Fragment mFragment;
-    List<MovieInfoBean> mData;
+    List<HomeItem> mData;
     final LayoutInflater mLayoutInflater;
     private OnItemClickListener mItemClickListener;
     private OnScrollListener mScrollListener;
@@ -55,7 +55,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         void onScrollToEnd();
     }
 
-    public HomeListAdapter(Fragment fragment, LayoutInflater layoutInflater, List<MovieInfoBean> datas) {
+    public HomeListAdapter(Fragment fragment, LayoutInflater layoutInflater, List<HomeItem> datas) {
         mFragment = fragment;
         mData = datas;
         mLayoutInflater = layoutInflater;
@@ -100,7 +100,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
                 mScrollListener.onScrollToEnd();
             }
             MyViewHolder myHolder = (MyViewHolder)holder;
-            MovieInfoBean program = mData.get(position-1);
+            HomeItem program = mData.get(position-1);
             myHolder.bindTo(program, position);
             // TODO study about the cache strategy about Glide.
             /*Glide.with(mFragment)
@@ -126,7 +126,7 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         public ImageView mImage;
         private int mPostion;
         private OnItemClickListener mOnItemClickListener;
-        private MovieInfoBean mBoundItem;
+        private HomeItem mBoundItem;
         private int size = imags.length;
 
         public MyViewHolder(OnItemClickListener listener, View itemView) {
@@ -139,11 +139,11 @@ public class HomeListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
             itemView.setOnClickListener(this);
         }
 
-        public void bindTo(MovieInfoBean item, int postion) {
+        public void bindTo(HomeItem item, int postion) {
             mBoundItem = item;
             mPostion = postion;
             mTitle.setText(item.getTitle());
-            mLocation.setText(item.getFormatedGenres());
+            mLocation.setText(item.getDescription());
             mTime.setText(item.getAverage()/**/);
             int img = rand.nextInt(size);
             mImage.setImageResource(imags[img]);

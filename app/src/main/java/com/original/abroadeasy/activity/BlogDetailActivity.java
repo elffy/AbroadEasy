@@ -10,14 +10,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.datas.beans.BeansUtils;
 import com.original.abroadeasy.datas.beans.MovieMajorInfos;
+import com.original.abroadeasy.util.LogUtil;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class BlogDetailActivity extends AppCompatActivity {
 
     private MovieMajorInfos mMovieInfos;
+
+    @Bind(R.id.content_blog)
+    TextView mContentTx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         if (mMovieInfos == null) {
             return;
         }
+        ButterKnife.bind(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,7 +58,10 @@ public class BlogDetailActivity extends AppCompatActivity {
 
 
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        toolBarLayout.setTitle(getTitle());
+        toolBarLayout.setTitle(mMovieInfos.getMovieTitle());
+        LogUtil.d("mMovieInfos.getDescription() = " + mMovieInfos.getDescription());
+        mContentTx.setText(mMovieInfos.getDescription());
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,5 +81,11 @@ public class BlogDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 }

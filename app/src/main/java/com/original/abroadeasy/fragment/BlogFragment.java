@@ -14,7 +14,9 @@ import android.widget.ImageView;
 
 import com.original.abroadeasy.R;
 import com.original.abroadeasy.adapter.BlogListAdapter;
+import com.original.abroadeasy.datas.beans.BeansUtils;
 import com.original.abroadeasy.datas.beans.MovieInfoBean;
+import com.original.abroadeasy.datas.beans.MovieMajorInfos;
 import com.original.abroadeasy.datas.beans.MovieUSBox;
 import com.original.abroadeasy.datas.beans.entities.SubjectEntity;
 import com.original.abroadeasy.datas.beans.entities.SubjectsEntity;
@@ -127,7 +129,13 @@ public class BlogFragment extends BaseFragment {
         mBlogAdapter.setOnItemClickListener(new BlogListAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(View view, int postion) {
+                MovieMajorInfos movieMajorInfos = new MovieMajorInfos();
+                MovieInfoBean mBean = mNewPrograms.get(postion);
+                movieMajorInfos.fillDatas(mBean.getId(), mBean.getTitle(), mBean.getImageUri(),
+                        mBean.getCastsCount(), mBean.getCastsIds(), mBean.getCastsAvatorUris(),
+                        mBean.getDirectorId(), mBean.getDirectorImageUri(), mBean.getAverage(), mBean.getFormatedGenres());
                 Intent intent = new Intent(mActivity, BlogDetailActivity.class);
+                intent.putExtra(BeansUtils.MOVIE_MAJOR_INFOS_KEY, movieMajorInfos);
                 startActivity(intent);
             }
         });

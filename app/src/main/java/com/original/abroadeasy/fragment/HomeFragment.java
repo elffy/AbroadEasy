@@ -27,9 +27,11 @@ import com.original.abroadeasy.datas.beans.MovieMajorInfos;
 import com.original.abroadeasy.datas.beans.MovieUSBox;
 import com.original.abroadeasy.datas.beans.entities.SubjectEntity;
 import com.original.abroadeasy.datas.beans.entities.SubjectsEntity;
+import com.original.abroadeasy.model.HomeItem;
 import com.original.abroadeasy.network.DoubanApiUtils;
 import com.original.abroadeasy.network.NetworkUtil;
 import com.original.abroadeasy.activity.DetailActivity;
+import com.original.abroadeasy.util.LiteOrmDBUtil;
 import com.original.abroadeasy.util.LogUtil;
 import com.original.abroadeasy.widget.BannerGallery;
 
@@ -56,6 +58,7 @@ public class HomeFragment extends BaseFragment {
     private HeaderViewHolder mHeaderViewHolder;
     private MyHandler mHandler;
 
+
     public HomeFragment() {
     }
 
@@ -79,6 +82,8 @@ public class HomeFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        mDatas.clear();
+        mNewPrograms.clear();
         mHandler.removeCallbacksAndMessages(null);
     }
 
@@ -122,7 +127,7 @@ public class HomeFragment extends BaseFragment {
 
     private LinearLayoutManager mLinearLayoutManager;
     private HomeListAdapter mAdapter;
-    //private List<ProgramItem> mDatas = new ArrayList<ProgramItem>();
+    private List<MovieInfoBean> mDatas = new ArrayList<MovieInfoBean>();
 
     private void intiView() {
 
@@ -137,10 +142,10 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onItemClicked(View view, int postion) {
                 MovieMajorInfos movieMajorInfos = new MovieMajorInfos();
-                MovieInfoBean mBean = mNewPrograms.get(postion);
+                MovieInfoBean mBean = mDatas.get(postion - 1);
                 movieMajorInfos.fillDatas(mBean.getId(), mBean.getTitle(), mBean.getImageUri(),
                         mBean.getCastsCount(), mBean.getCastsIds(), mBean.getCastsAvatorUris(),
-                        mBean.getDirectorId(), mBean.getDirectorImageUri(), mBean.getAverage());
+                        mBean.getDirectorId(), mBean.getDirectorImageUri(), mBean.getAverage(), mBean.getFormatedGenres());
                 startDetailActivity(movieMajorInfos);
             }
         });
@@ -159,7 +164,7 @@ public class HomeFragment extends BaseFragment {
     private static final int LOAD_NEW= 2;
     private int mPendLoadType = 0;
     //private List<ProgramItem> mNewPrograms;
-    private List<MovieInfoBean> mNewPrograms = new ArrayList<MovieInfoBean>();
+    private List<HomeItem> mNewPrograms = new ArrayList<HomeItem>();
     private int mLoadIndex = 0;
     private LoadDataTask mLoadTask;
     private void initData() {
@@ -167,8 +172,11 @@ public class HomeFragment extends BaseFragment {
             // TODO add Toast
             return;// network unavailable, just return;
         }
-        mLoadTask = new LoadDataTask(LOAD_MORE);
-        mLoadTask.execute(mLoadIndex);
+        //Don't do this in the beginning
+        /*mLoadTask = new LoadDataTask(LOAD_MORE);
+        mLoadTask.execute(mLoadIndex);*/
+
+        loadCacheData();
     }
 
     public static boolean mFirstLoad = true;
@@ -266,7 +274,22 @@ public class HomeFragment extends BaseFragment {
 
                 LogUtil.d(subject.getTitle());
 
-                mNewPrograms.add(new MovieInfoBean(subject));
+                //Fill the cache
+                MovieInfoBean movieInfo = new MovieInfoBean(subject);
+                HomeItem homeItem = new HomeItem();
+                homeItem.fillDatas(movieInfo.getTitle(), movieInfo.getImageUri(),
+                        movieInfo.getAverage(), movieInfo.getFormatedGenres());
+                //插入数据库 这种耗时的操作放在doInBackgroud比较合适
+                if (!isExistTitle(homeItem.getTitle())) {
+                    //加入到列表中
+                    mNewPrograms.add(homeItem);
+                    //添加到数据库
+                    LiteOrmDBUtil.insert(homeItem);
+
+                }
+                //添加前需要clear以下吗
+                mDatas.add(movieInfo);
+
             }
         }
 
@@ -403,5 +426,24 @@ public class HomeFragment extends BaseFragment {
         Uri uri = Uri.parse("https://github.com/dxjia/DoubanTop");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
+    }
+
+    private void loadCacheData() {
+        List<HomeItem> temItems = LiteOrmDBUtil.getQueryAll(HomeItem.class);
+        if (0 < temItems.size()) {
+            mNewPrograms.addAll(temItems);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private boolean isExistTitle(String title) {
+        String field = "title";
+        String[] value = new String[]{title};
+        List<HomeItem> tempList = LiteOrmDBUtil.getQueryByWhere(HomeItem.class, field, value);
+        if (null != tempList && 0 < tempList.size()) {
+            return true;
+        }
+
+        return  false;
     }
 }

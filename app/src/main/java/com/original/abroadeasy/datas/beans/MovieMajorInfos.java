@@ -16,6 +16,7 @@ public class MovieMajorInfos implements Parcelable {
     private String mDirectorId;
     private String mDirectorImage;
     private String mMovieScore;
+    private String mDescription;
 
     public MovieMajorInfos() {
     }
@@ -30,6 +31,7 @@ public class MovieMajorInfos implements Parcelable {
         mDirectorId = in.readString();
         mDirectorImage = in.readString();
         mMovieScore = in.readString();
+        mDescription = in.readString();
     }
 
     public String getMovieId() {
@@ -104,9 +106,17 @@ public class MovieMajorInfos implements Parcelable {
         this.mMovieScore = mMovieScore;
     }
 
+    public void setDescription(String description) {
+        this.mDescription = description;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
     public void fillDatas(String movieId, String movieTitle, String movieImageUri,
                           int castsCount, String[] castsIds, String[] castsImages,
-                          String directorId, String directorImage, String movieScore) {
+                          String directorId, String directorImage, String movieScore, String description) {
         setMovieId(movieId);
         setMovieTitle(movieTitle);
         setMovieImageUri(movieImageUri);
@@ -116,6 +126,7 @@ public class MovieMajorInfos implements Parcelable {
         setDirectorId(directorId);
         setDirectorImage(directorImage);
         setMovieScore(movieScore);
+        setDescription(description);
     }
 
     @Override
@@ -146,6 +157,7 @@ public class MovieMajorInfos implements Parcelable {
         dest.writeString(mDirectorId);
         dest.writeString(mDirectorImage);
         dest.writeString(mMovieScore);
+        dest.writeString(mDescription);
     }
 
     public String toString() {
